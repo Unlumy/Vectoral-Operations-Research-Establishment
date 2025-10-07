@@ -6,7 +6,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client.ADT.Vore;
+namespace Content.Client._VORE.Vore;
 
 public sealed class VoreOverlay : Overlay
 {
@@ -59,4 +59,5 @@ public sealed class VoreOverlay : Overlay
         }
     }
 }
+
 

@@ -1,12 +1,12 @@
 using Content.Server.Fluids.EntitySystems;
-using Content.Shared.ADT.Vore;
-using Content.Shared.ADT.Vore.Components;
+using Content.Shared._VORE.Vore;
+using Content.Shared._VORE.Vore.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 
-namespace Content.Server.ADT.Vore;
+namespace Content.Server._VORE.Vore;
 
 public sealed class VoreSystem : SharedVoreSystem
 {
@@ -104,4 +104,5 @@ public sealed class VoreSystem : SharedVoreSystem
         _puddleSystem.TrySpillAt(xform.Coordinates, solution, out _);
     }
 }
+
 

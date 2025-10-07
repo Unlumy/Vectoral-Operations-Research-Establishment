@@ -1,9 +1,9 @@
-using Content.Shared.ADT.Vore.Components;
+using Content.Shared._VORE.Vore.Components;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 
-namespace Content.Client.ADT.Vore;
+namespace Content.Client._VORE.Vore;
 
 public sealed class VoreOverlaySystem : EntitySystem
 {
@@ -49,4 +49,5 @@ public sealed class VoreOverlaySystem : EntitySystem
         }
     }
 }
+
 

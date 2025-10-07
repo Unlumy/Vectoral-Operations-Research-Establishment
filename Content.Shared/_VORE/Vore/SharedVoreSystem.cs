@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Content.Shared.Actions;
-using Content.Shared.ADT.Vore.Components;
+using Content.Shared._VORE.Vore.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -11,7 +11,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.ADT.Vore;
+namespace Content.Shared._VORE.Vore;
 
 public abstract class SharedVoreSystem : EntitySystem
 {
@@ -135,4 +135,5 @@ public sealed partial class VoreReleaseActionEvent : InstantActionEvent { }
 
 [Serializable, NetSerializable]
 public sealed partial class VoreDoAfterEvent : SimpleDoAfterEvent { }
+
 
