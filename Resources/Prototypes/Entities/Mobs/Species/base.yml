@@ -309,6 +309,7 @@
   - type: BloodCough
     postingSayDamage: blood-cough
   - type: TimeDespawnDamage
+  - type: Vore
   # End-ADT Tweak
 
 - type: entity
