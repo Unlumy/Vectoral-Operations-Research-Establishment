@@ -1,0 +1,29 @@
+- type: entity
+  id: ActionVore
+  name: Vore
+  description: Devour a target entity.
+  noSpawn: true
+  components:
+  - type: EntityTargetAction
+    icon: { sprite : Interface/Actions/devour.rsi, state: icon }
+    iconOn: { sprite : Interface/Actions/devour.rsi, state: icon-on }
+    event: !type:VoreActionEvent
+    useDelay: 0
+    checkCanAccess: true
+    range: 1
+    canTargetSelf: false
+
+- type: entity
+  id: ActionVoreRelease
+  name: Release
+  description: Release the last devoured entity.
+  noSpawn: true
+  components:
+  - type: InstantAction
+    icon:
+      sprite: ADT/Changeling/Actions/actions_ling.rsi
+      state: biodegrade
+    event: !type:VoreReleaseActionEvent
+    useDelay: 1
+
+
