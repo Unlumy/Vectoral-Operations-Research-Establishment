@@ -5,9 +5,8 @@
   noSpawn: true
   components:
   - type: EntityTargetAction
-    icon:
-      sprite: Interface/Actions/actions_ai.rsi
-      state: mass_emote
+    icon: { sprite : Interface/Actions/devour.rsi, state: icon }
+    iconOn: { sprite : Interface/Actions/devour.rsi, state: icon-on }
     event: !type:VoreActionEvent
     useDelay: 0
     checkCanAccess: true
@@ -22,8 +21,8 @@
   components:
   - type: InstantAction
     icon:
-      sprite: Interface/Actions/actions_ai.rsi
-      state: encore
+      sprite: ADT/Changeling/Actions/actions_ling.rsi
+      state: biodegrade
     event: !type:VoreReleaseActionEvent
     useDelay: 1
 
