@@ -33,6 +33,7 @@
   - Glasses
   - SurvivalMedical
   - Trinkets
+  - ADTSprayPaints # ADT-Tweak
   - GroupSpeciesBreathToolMedical
   # ADT underwear tweak start
   - ADTTop
@@ -56,6 +57,7 @@
   - ADTRoboticistPDALoadout
   - Survival
   - Trinkets
+  - ADTSprayPaints # ADT-Tweak
   - GroupSpeciesBreathTool
   # ADT underwear tweak start
   - ADTTop
@@ -84,6 +86,28 @@
   # ADT underwear tweak end
 
 - type: roleLoadout
+  id: JobADTCentcomConsultant
+  groups:
+  - Inventory # Corvax-Loadouts
+  - GroupTankHarness
+  - ADTCentcomConsultantHead
+  - ADTCentcomConsultantEars
+  - ADTCentcomConsultantJumpsuit
+  - ADTCentcomConsultantHands
+  - ADTCentcomConsultantNeck
+  - ADTCentcomConsultantBack
+  - ADTCentcomConsultantOuterClothing
+  - ADTCentcomConsultantShoes
+  - SurvivalSecurity
+  - Trinkets
+  - GroupSpeciesBreathToolSecurity
+  # ADT underwear tweak start
+  - ADTCentcomConsultantSocks
+  - ADTTop
+  - ADTBottom
+  # ADT underwear tweak end
+
+- type: roleLoadout
   id: JobADTSeniorPhysician
   groups:
   - Inventory # Corvax-Loadouts
@@ -96,6 +120,7 @@
   - MedicalBackpack
   - SeniorPhysicianOuterClothing # ADT-Tweak-senior
   - Trinkets
+  - ADTSprayPaints # ADT-Tweak
   - SurvivalMedical
   - GroupSpeciesBreathToolMedical
   - MedicalShoes
@@ -119,6 +144,7 @@
   - ScientistShoes
   - Survival
   - Trinkets
+  - ADTSprayPaints # ADT-Tweak
   # ADT tweak start
   - ADTTop
   - ADTBottom
@@ -140,6 +166,7 @@
   - StationEngineerShoes
   - SurvivalExtended
   - Trinkets
+  - ADTSprayPaints # ADT-Tweak
   # ADT tweak start
   - ADTTop
   - ADTBottom
@@ -197,15 +224,14 @@
   # ADT underwear tweak end
 
 - type: roleLoadout
-  id: JobADTGuardOfficer
+  id: JobADTCorrectionsOfficer
   groups:
   - Inventory # Corvax-Loadouts
   - GroupTankHarness
-  - ADTGuardOfficerHead
+  - ADTCorrectionsOfficerHead
   - SecurityOfficerNeckADT # ADT-Loadouts
-  - ADTGuardOfficerJumpsuit
-  - ADTSeniorOfficerOuterClothing
-  - SecurityBelt
+  - ADTCorrectionsOfficerJumpsuit
+  - ADTCorrectionsOfficerOuterClothing
   - SecurityBackpack
   - SecurityShoes
   - SurvivalSecurity
@@ -239,6 +265,7 @@
   # ADT underwear tweak end
   - Survival
   - Trinkets
+  - ADTSprayPaints # ADT-Tweak
   - GroupSpeciesBreathTool
 
 - type: roleLoadout
@@ -248,8 +275,8 @@
   - GroupTankHarness
   - ADTMinerBackpack
   - ADTMinerJumpsuit
-  - ADTMinerSpecialistNeck
-  - ADTMinerSpecialistEars
+  - ADTMinerNeck
+  - ADTMinerEars
   - ADTMinerOuterClothing
   - ADTMinerShoes
   - Glasses
@@ -261,4 +288,5 @@
   # ADT underwear tweak end
   - Survival
   - Trinkets
+  - ADTSprayPaints # ADT-Tweak
   - GroupSpeciesBreathTool

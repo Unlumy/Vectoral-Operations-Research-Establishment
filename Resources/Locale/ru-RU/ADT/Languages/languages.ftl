@@ -37,13 +37,13 @@ language-Fire-description = Звуки огня, что каким-то обра
 language-SolCommon-name = Солнечный язык
 language-SolCommon-description = Общий язык, на котором говорят обитатели солнечной системы.
 
-language-Cat-name = Кошачий
+language-Cat-name = Животный кошачий
 language-Cat-description = Примитивные звуки, издаваемые кошками. Каким-то образом они передают смысл!
 
-language-Dog-name = Собачий
+language-Dog-name = Животный собачий
 language-Dog-description = Лающие и рычащие звуки, используемые для передачи примитивных значений.
 
-language-Mothroach-name = Молиный
+language-Mothroach-name = Животный молиный
 language-Mothroach-description = Милые пищащие звуки, из которых иногда складываются осмысленные фразы.
 
 language-Xeno-name = Ксено
@@ -52,33 +52,33 @@ language-Xeno-description = Давно забытый язык ксеномор�
 language-RobotTalk-name = Троичный
 language-RobotTalk-description = Это не язык сам по себе, но он используется роботами и КПБ для обмена данными.
 
-language-Monkey-name = Обезьяний
+language-Monkey-name = Животный обезьяний
 language-Monkey-description = Набор звуков и жестов, издаваемых приматами с целью общения.
 
-language-Bee-name = Пчелиный
+language-Bee-name = Животный пчелиный
 language-Bee-description = Странный язык, основанный на движениях, которые пчелы используют для общения.
 
-language-Mouse-name = Мышиный
+language-Mouse-name = Животный мышиный
 language-Mouse-description = Милые пищащие звуки, которые мыши используют, чтобы выпрашивать еду.
 
 # These ones are half-assed because these creatures are almost never played as.
-language-Chicken-name = Animal chicken
-language-Chicken-description = A collection of sounds made by chickens.
+language-Chicken-name = Животный куриный
+language-Chicken-description = Набор звуков и жестов, издаваемых курицами с целью общения.
 
-language-Duck-name = Animal duck
-language-Duck-description = A collection of sounds made by ducks.
+language-Duck-name = Животный утиный
+language-Duck-description = Набор звуков и жестов, издаваемых утками с целью общения.
 
-language-Cow-name = Animal cow
-language-Cow-description = A collection of sounds made by cows.
+language-Cow-name = Животный коровий
+language-Cow-description = Набор звуков и жестов, издаваемых коровами с целью общения.
 
-language-Sheep-name = Animal sheep
-language-Sheep-description = A collection of sounds made by sheep.
+language-Sheep-name = Животный овечий
+language-Sheep-description = Набор звуков и жестов, издаваемых овцами с целью общения.
 
-language-Kangaroo-name = Animal kangaroo
-language-Kangaroo-description = A collection of sounds made by kangaroos.
+language-Kangaroo-name = Животный кенгуриный
+language-Kangaroo-description = Набор звуков и жестов, издаваемых кенгуру с целью общения.
 
-language-Pig-name = Animal pig
-language-Pig-description = A collection of sounds made by pigs.
+language-Pig-name = Животный свинной
+language-Pig-description = Набор звуков и жестов, издаваемых свиньями с целью общения.
 
 language-Arachnid-name = Паучий
 language-Arachnid-description = Древний язык, на котором говорят арахниды.
@@ -125,7 +125,7 @@ language-Clownish-description = Клоунский язык! Хонк!
 language-Scratches-name = Скретчи
 language-Scratches-description = Язык резоми, состоящий из различных хрипов, тресков и писков, которые нетренированным ухом часто воспринимается, как какофония.
 
-language-SignLanguage-name = Язык жестов
+language-SignLanguage-name = Жестовый язык
 language-SignLanguage-description = Язык, что позволяет глухим представителям всевозможных рас контактировать между собой.
 
 language-DionaCollectiveMind-name = Колл. разум дион
@@ -140,5 +140,8 @@ language-XenoCollectiveMind-description = Коллективный разум к
 language-SiliconCollectiveMind-name = Сеть киборгов NT
 language-SiliconCollectiveMind-description = Канал связи, предназначенный для передачи данных между позитрониками.
 
-language-ChangelingCollectiveMind-name = Разум улья
+language-ChangelingCollectiveMind-name = Колл. разум улья
 language-ChangelingCollectiveMind-description = Коллективный разум генокрадов, рождённых в одном улье.
+
+language-MorphCollectiveMind-name = Колл. разум морфов
+language-MorphCollectiveMind-description = Коллективный разум морфов.

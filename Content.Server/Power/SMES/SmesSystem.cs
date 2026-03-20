@@ -1,6 +1,7 @@
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Power;
+using Content.Shared.Power.Components;
 using Content.Shared.Rounding;
 using Content.Shared.SMES;
 using JetBrains.Annotations;
@@ -9,7 +10,7 @@ using Robust.Shared.Timing;
 namespace Content.Server.Power.SMES;
 
 [UsedImplicitly]
-internal sealed class SmesSystem : EntitySystem
+public sealed class SmesSystem : EntitySystem //ADT-tweak: made public
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;

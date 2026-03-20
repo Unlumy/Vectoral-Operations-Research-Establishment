@@ -6,13 +6,14 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobChemist
-      time: 21600 #6 hrs
+      time: 6h
     - !type:RoleTimeRequirement
       role: JobMedicalDoctor
-      time: 21600 #6 hrs
+      time: 6h
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 216000 # 60 hrs
+      time: 60h
+  weight: 9
   startingGear: SeniorPhysicianGear
   icon: "JobIconSeniorPhysician"
   supervisors: job-supervisors-cmo
@@ -27,3 +28,18 @@
     id: SeniorPhysicianPDA
     ears: ClothingHeadsetMedical
     eyes: ADTClothingEyesGlassesMedChem
+  storage:
+    back:
+    - ADTHumanCubeWrapped #ADT-CustomADTLoadout
+
+- type: chameleonOutfit
+  id: ADTSeniorPhysicianChameleonOutfit
+  job: ADTSeniorPhysician
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatBeretSeniorPhysician
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    neck: ClothingNeckStethoscope
+    outerClothing: ClothingOuterCoatLabSeniorPhysician
+    gloves: ClothingHandsGlovesLatex

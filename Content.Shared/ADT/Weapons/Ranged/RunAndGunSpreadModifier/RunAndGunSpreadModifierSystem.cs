@@ -11,26 +11,33 @@ public sealed class RunAndGunSpreadModifierSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<RunAndGunSpreadModifierComponent, GunShotEvent>(OnModifyAngle);
         SubscribeLocalEvent<RunAndGunBlockerComponent, AttemptShootEvent>(OnBlocker);
     }
+
     private void OnModifyAngle(Entity<RunAndGunSpreadModifierComponent> ent, ref GunShotEvent args)
     {
-        if (!TryComp<PhysicsComponent>(args.User, out var physics) || physics.LinearVelocity.LengthSquared() < 1)
+        if (!TryComp<PhysicsComponent>(args.User, out var physics) ||
+            physics.LinearVelocity.Length() < ent.Comp.MinVelocity)
             return;
-        var offset = new Vector2(_random.NextFloat(-physics.LinearVelocity.X * ent.Comp.Modifyer, physics.LinearVelocity.X * ent.Comp.Modifyer),
-        _random.NextFloat(-physics.LinearVelocity.Y * ent.Comp.Modifyer, physics.LinearVelocity.Y * ent.Comp.Modifyer));
-        var toCoordinates = args.ToCoordinates.Offset(offset);
+        // Log.Warning(physics.LinearVelocity.LengthSquared().ToString()); //раскомментируйте, если хотите заменять скорость для нового оружия
 
-        args.ToCoordinates = toCoordinates;
+        var dir = args.ToCoordinates.Position - args.FromCoordinates.Position;
+
+        var spread = physics.LinearVelocity.Length() * ent.Comp.Modifier / 4;
+
+        args.ToCoordinates = args.ToCoordinates.Offset(new Vector2(
+            dir.X * _random.NextFloat(0f, spread) - dir.Y * _random.NextFloat(-spread, spread),
+            dir.Y * _random.NextFloat(0f, spread) + dir.X * _random.NextFloat(-spread, spread)
+        ));
     }
+
     private void OnBlocker(Entity<RunAndGunBlockerComponent> ent, ref AttemptShootEvent args)
     {
-        if (args.Cancelled)
-            return;
-        if (!TryComp<PhysicsComponent>(args.User, out var physics) || physics.LinearVelocity.LengthSquared() > 0)
-        {
+        if (!args.Cancelled &&
+            TryComp<PhysicsComponent>(args.User, out var physics) &&
+            physics.LinearVelocity.Length() > ent.Comp.MaxVelocity)
             args.Cancelled = true;
-        }
     }
 }

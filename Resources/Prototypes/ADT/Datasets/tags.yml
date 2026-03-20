@@ -12,7 +12,7 @@
   - Banana
   - BananaPeel
   - BaseballBat
-  - BBQsauce
+  - FoodCondimentPacketBbq
   - Bedsheet
   - Beer
   - BikeHorn
@@ -28,7 +28,6 @@
   - Bottle
   - Brain
   - Bread
-  - Briefcase
   - BrimFlatcapBrown
   - BrimFlatcapGrey
   - Brutepack
@@ -67,7 +66,6 @@
   - Galaxythistle
   - GasMask
   - GasScrubber
-  - GasTank
   - GasVent
   - Gauze
   - GeigerCounter
@@ -86,7 +84,7 @@
   - Liver
   - Lungs
   - Mask
-  - Mayo
+  - ADTFoodCondimentPacketMayo
   - Meat
   - SpaceCash
   - Medkit
@@ -115,3 +113,4 @@
   - Wrench
   - ADTTeaPack
   - ADTYupiPack
+  - ADTPDA

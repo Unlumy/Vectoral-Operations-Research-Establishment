@@ -36,6 +36,10 @@ uplink-syndiholoprojectorfield-desc = Устройство, создающее �
 
 # Ammo
 
+uplink-estoc-ammo-name = Винтовочный магазин (6.5 мм ТСФ)
+uplink-estoc-ammo-desc = Винтовочный магазин на 25 патронов. Совместим с марксманской винтовкой Эсток.
+uplink-magazine-bulldog-slug-name = Барабанный магазин (12х70 пуля)
+uplink-magazine-bulldog-pellet-name = Барабанный магазин (12х70 дробь)
 uplink-Shotgun-magazine-name = Магазин для дробовика (12х70 дробь)
 uplink-Shotgun-magazine-desc = Магазин с патронами 12х70 дробь для дробовика "Бульдог"
 uplink-MachineGun-magazine-name = Магазин для пистолета-пулемета (9х19 мм)
@@ -65,8 +69,8 @@ uplink-xc67-description = Набор, содержащий штурмовую в
 uplink-xc67ammo-name = Набор магазинов для xC-67
 uplink-xc67ammo-description = Набор, содержащий три расширенных магазина от хС-67 под патрон 6.5 мм ТСФ.
 
-uplink-AKMS-bundle-name = Набор АКМС
-uplink-AKMS-bundle-desc = набор, содержащий АКМС и четыре магазина к нему.
+uplink-AKMS-bundle-name = Набор АКМ
+uplink-AKMS-bundle-desc = Набор, содержащий АКМ и четыре магазина к нему.
 
 uplink-hristov-bundle-name = Набор модернизированного "Христова"
 uplink-hristov-bundle-desc = Содержит в себе Улучшенную винтовку "Христов" и три запасных магазина к нему.
@@ -222,12 +226,6 @@ uplink-cqc-desc = Одноразовый мануал, что обучит ва�
 uplink-attachmentsbundle-name = Набор оружейных модулей
 uplink-attachmentsbundle-description = Комплект из вертикальной рукояти, лазерного целеуказателя, коллиматорного и оптического прицелов.
 
-uplink-saw-advanced-name = Улучшенная циркулярная пила
-uplink-saw-advanced-desc = Вы уверены, что с её помощью сможете разрезать всё, что угодно.
-
-uplink-clothing-outer-vest-web-elite-name = Элитный синтетический бронежилет
-uplink-clothing-outer-vest-web-elite-desc = Синтетический бронежилет. Имеет дополнительные ремни и покрыт толстым слоем крайне термостойкого волокна.
-
 uplink-mod-name = Кроваво-красный МОД
 uplink-mod-description = Классический МОД синдиката, что идёт в комплекте с базовыми модулями.
 
@@ -264,4 +262,31 @@ uplink-contortionist-jumpsuit-advanced-name = Блюспейс костюм ак
 uplink-contortionist-jumpsuit-advanced-desc = Атмосферный комбинезон, что позволяет вам ползать по вентиляции даже с рюкзаком и скафандром. Использует блюспейс-технологии.
 
 uplink-mime-enhanced-book-name = Мануал улучшенных пантомим
-uplink-mime-enhanced-book-desc = Эта книга написана великими мудрецами пантомим! Улучшит вашу способность создавать невидимые стены, даст новую способность "Выстрел из пальца" и приём "Удар в горло"!
+uplink-mime-enhanced-book-desc = Эта книга написана великими мудрецами пантомим! Улучшит вашу способность создавать невидимые стены, даст новую способность "Выстрел из пальца" и приём "Тишина"!
+
+# uplink-estoc-bundle-name = Эсток ДРМ
+# uplink-estoc-bundle-desc = Специальная стрелковая винтовка, стреляющая очередями, оснащенна оптическим прицелом среднего радиуса действия для боя на средних дистанциях. В комплекте с двумя магазинами для винтовки (6.5 мм ТСФ).
+
+# uplink-acolyte-armor-name = Акультная броня
+# uplink-acolyte-armor-desc = Есть у каждого уважающего себя акультного лидера. Зловещего вида броня, сделанная из костей и удивительно устойчивая к повреждениям.
+
+# uplink-contraband-lighter-name = Подозрительная коробка с зажигалками или коробкой спичкек
+# uplink-contraband-lighter-desc = Таинственный набор, в котором гарантированно будет зажигалка с брендом Syndicate. Не требует заправки топлива.
+
+uplink-sandevistan-implant-name = Сандевистан
+uplink-sandevistan-implant-desc = Данный имплант позволяет вам ускорить ваши реакцию и скорость.
+
+uplink-davids-jacket-valid-name = Куртка эджраннера
+uplink-davids-jacket-valid-desc = Ты на самой грани. Покажи им, что ты готов на всё. Имеет защиту от различных типов урона.
+
+uplink-mantis-daggers-name = Клинки богомола
+uplink-mantis-daggers-desc = Позволяет выпускать из рук клинки богомола.
+
+uplink-cyberpsycho-bundle-name = Набор киберпсиха
+uplink-cyberpsycho-bundle-desc = Вы поняли, что плоть слаба? Тогда этот набор для вас! В него входят импланты клинков богомола и сандевистан, а так же куртка эджранера.
+
+uplink-clothing-no-sound-shoes-name = Бесшумная обувь
+uplink-clothing-no-sound-shoes-desc = Ботинки-хамелеоны с особой подошвой, позволяющие передвигаться бесшумно.
+
+uplink-clothing-super-shoes-name = Продвинутые ботинки-хамелеоны
+uplink-clothing-super-shoes-desc = Ботинки-хамелеоны, обеспечивающие и бесшумную ходьбу, и защиту от поскальзывания.

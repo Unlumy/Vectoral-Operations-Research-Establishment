@@ -1,27 +1,26 @@
 using System.Linq;
 using System.Numerics;
-using Content.Server.Advertise;
 using Content.Server.Advertise.EntitySystems;
+using Content.Server.ADT.Economy;
 using Content.Server.Cargo.Systems;
-using Content.Server.Emp;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Stack;
 using Content.Server.Store.Components;
-using Content.Server.ADT.Economy;
-using Content.Shared.ADT.Economy;
+using Content.Server.Vocalization.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
-using Content.Shared.Actions;
-using Content.Shared.Damage;
+using Content.Shared.Advertise.Components;
+using Content.Shared.ADT.Economy;
+using Content.Shared.Cargo;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
-using Content.Shared.Advertise.Components;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Emp;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.PDA;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Stacks;
@@ -68,6 +67,7 @@ namespace Content.Server.VendingMachines
             SubscribeLocalEvent<VendingMachineComponent, DamageChangedEvent>(OnDamage); //ADT-Economy
             SubscribeLocalEvent<VendingMachineComponent, PriceCalculationEvent>(OnVendingPrice);
             SubscribeLocalEvent<VendingMachineComponent, EmpPulseEvent>(OnEmpPulse);
+            SubscribeLocalEvent<VendingMachineComponent, TryVocalizeEvent>(OnTryVocalize);
 
             SubscribeLocalEvent<VendingMachineComponent, ActivatableUIOpenAttemptEvent>(OnActivatableUIOpenAttempt);
 
@@ -235,8 +235,9 @@ namespace Content.Server.VendingMachines
 
         private void OnWithdrawMessage(EntityUid uid, VendingMachineComponent component, VendingMachineWithdrawMessage args)
         {
-            _stackSystem.Spawn(component.Credits, PrototypeManager.Index(component.CreditStackPrototype),
+            _stackSystem.SpawnAtPosition(component.Credits, component.CreditStackPrototype, // ADT-Fix
                 Transform(uid).Coordinates);
+
             component.Credits = 0;
             Audio.PlayPvs(component.SoundWithdrawCurrency, uid);
 
@@ -514,14 +515,13 @@ namespace Content.Server.VendingMachines
             }
 
             // Default spawn coordinates
-            var spawnCoordinates = Transform(uid).Coordinates;
+            var xform = Transform(uid);
+            var spawnCoordinates = xform.Coordinates;
 
             //Make sure the wallvends spawn outside of the wall.
-
             if (TryComp<WallMountComponent>(uid, out var wallMountComponent))
             {
-
-                var offset = wallMountComponent.Direction.ToWorldVec() * WallVendEjectDistanceFromWall;
+                var offset = (wallMountComponent.Direction + xform.LocalRotation - Math.PI / 2).ToVec() * WallVendEjectDistanceFromWall;
                 spawnCoordinates = spawnCoordinates.Offset(offset);
             }
             // ADT vending eject count start
@@ -652,6 +652,11 @@ namespace Content.Server.VendingMachines
                 args.Disabled = true;
                 component.NextEmpEject = _timing.CurTime;
             }
+        }
+
+        private void OnTryVocalize(Entity<VendingMachineComponent> ent, ref TryVocalizeEvent args)
+        {
+            args.Cancelled |= ent.Comp.Broken;
         }
     }
 }

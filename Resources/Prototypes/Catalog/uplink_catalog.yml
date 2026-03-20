@@ -81,6 +81,22 @@
   - UplinkWeaponry
 
 - type: listing
+  id: UplinkEnergyCrossbow
+  name: uplink-energycrossbow-name
+  description: uplink-energycrossbow-desc
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 3
+  productEntity: WeaponEnergyCrossbow
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
   id: UplinkThrowingKnivesKit
   name: uplink-knives-kit-name
   description: uplink-knives-kit-desc
@@ -190,6 +206,20 @@
     Telecrystal: 10
   cost:
     Telecrystal: 17
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkEstocBundle
+  name: uplink-estoc-bundle-name
+  description: uplink-estoc-bundle-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Rifles/estoc.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledRifle
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 11
+  cost:
+    Telecrystal: 18
   categories:
   - UplinkWeaponry
 
@@ -506,6 +536,29 @@
   categories:
   - UplinkAmmo
 
+# For the Bulldog
+- type: listing
+  id: UplinkMagazineShotgunPellet
+  name: uplink-magazine-bulldog-pellet-name
+  description: uplink-magazine-bulldog-pellet-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: pellets }
+  productEntity: MagazineShotgun
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+
+- type: listing
+  id: UplinkMagazineShotgunSlug
+  name: uplink-magazine-bulldog-slug-name
+  description: uplink-magazine-bulldog-slug-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: slug }
+  productEntity: MagazineShotgunSlug
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkAmmo
+
 # For the Cobra
 - type: listing
   id: UplinkMagazinePistolCaselessRifle
@@ -538,6 +591,17 @@
   productEntity: MagazineBoxLightRifle
   cost:
     Telecrystal: 1
+  categories:
+  - UplinkAmmo
+
+# For the Estoc
+- type: listing
+  id: UplinkEstocAmmo
+  name: uplink-estoc-ammo-name
+  description: uplink-estoc-ammo-desc
+  productEntity: MagazineRifle
+  cost:
+    Telecrystal: 2
   categories:
   - UplinkAmmo
 
@@ -733,6 +797,15 @@
           - SurplusBundle
 
 # Deception
+- type: listing
+  id: UplinkSyndicateIDCard
+  name: uplink-syndicate-id-card-name
+  description: uplink-syndicate-id-card-desc
+  productEntity: SyndicateIDCard
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkDeception
 
 - type: listing
   id: UplinkAgentIDCard
@@ -1105,17 +1178,38 @@
       - SurplusBundle
 
 - type: listing
-  id: UplinkSingarityBeacon
-  name: uplink-singularity-beacon-name
-  description: uplink-singularity-beacon-desc
-  productEntity: SingularityBeacon
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 4
+  id: UplinkStarterKit
+  name: uplink-starter-kit-name
+  description: uplink-starter-kit-desc
+  productEntity: ClothingBackpackDuffelSyndicateFilledStarterKit
   cost:
-    Telecrystal: 12
+    Telecrystal: 40
   categories:
-    - UplinkDisruption
+  - UplinkDisruption
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+        - NukeOpsUplink
+    - !type:BuyerWhitelistCondition
+      blacklist:
+        components:
+        - SurplusBundle
+
+#ADT-tweak-start
+# - type: listing
+#   id: UplinkSingarityBeacon
+#   name: uplink-singularity-beacon-name
+#   description: uplink-singularity-beacon-desc
+#   productEntity: SingularityBeacon
+#   discountCategory: usualDiscounts
+#   discountDownTo:
+#     Telecrystal: 4
+#   cost:
+#     Telecrystal: 12
+#   categories:
+#     - UplinkDisruption
+#ADT-tweak-end
 
 - type: listing
   id: UplinkCameraBug
@@ -1153,7 +1247,7 @@
   name: uplink-reinforcement-radio-name
   description: uplink-reinforcement-radio-traitor-desc
   productEntity: ReinforcementRadioSyndicate
-  icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-urist }
+  icon: { sprite: ADT/Objects/Devices/communication.rsi, state: old-radio-urist } # ADT-tweak: Objects/Devices/communication.rsi --> ADT/Objects/Devices/communication.rsi
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 6 # ADT-Tweak 8>6
@@ -1172,7 +1266,7 @@
   name: uplink-reinforcement-radio-nukeops-name
   description: uplink-reinforcement-radio-nukeops-desc
   productEntity: ReinforcementRadioSyndicateNukeops
-  icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-nukeop }
+  icon: { sprite: ADT/Objects/Devices/communication.rsi, state: old-radio-nukeop } # ADT-tweak: Objects/Devices/communication.rsi --> ADT/Objects/Devices/communication.rsi
   cost:
     Telecrystal: 16 #ADT_Tweak - подкрепление стоит дешево, но поступает без своего аплинка
   categories:
@@ -1188,9 +1282,9 @@
   name:  uplink-reinforcement-radio-cyborg-assault-name
   description: uplink-reinforcement-radio-cyborg-assault-desc
   productEntity: ReinforcementRadioSyndicateCyborgAssault
-  icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-borg-assault }
+  icon: { sprite: ADT/Objects/Devices/communication.rsi, state: old-radio-borg-assault } # ADT-tweak: Objects/Devices/communication.rsi --> ADT/Objects/Devices/communication.rsi
   cost:
-    Telecrystal: 100 # ADT-Tweak 65>100
+    Telecrystal: 80 # ADT-Tweak 65>80
   categories:
     - UplinkAllies
   conditions:
@@ -1204,7 +1298,7 @@
   name: uplink-reinforcement-radio-ancestor-name
   description: uplink-reinforcement-radio-ancestor-desc
   productEntity: ReinforcementRadioSyndicateAncestor
-  icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-ancestor }
+  icon: { sprite: ADT/Objects/Devices/communication.rsi, state: old-radio-ancestor } # ADT-tweak: Objects/Devices/communication.rsi --> ADT/Objects/Devices/communication.rsi
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 2 # ADT-Tweak 4>2
@@ -1223,7 +1317,7 @@
   name: uplink-reinforcement-radio-ancestor-name
   description: uplink-reinforcement-radio-ancestor-desc
   productEntity: ReinforcementRadioSyndicateAncestorNukeops
-  icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-ancestor }
+  icon: { sprite: ADT/Objects/Devices/communication.rsi, state: old-radio-ancestor } # ADT-tweak: Objects/Devices/communication.rsi --> ADT/Objects/Devices/communication.rsi
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 4
@@ -1259,7 +1353,7 @@
   id: UplinkMobCatMicrobomb
   name: uplink-mobcat-microbomb-name
   description: uplink-mobcat-microbomb-desc
-  icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-syndicat }
+  icon: { sprite: ADT/Objects/Devices/communication.rsi, state: old-radio-syndicat } # ADT-tweak: Objects/Devices/communication.rsi --> ADT/Objects/Devices/communication.rsi
   productEntity: ReinforcementRadioSyndicateSyndiCat
   discountCategory: usualDiscounts
   discountDownTo:
@@ -1557,20 +1651,6 @@
   categories:
   - UplinkWearables
 
-# TODO: Revert back to normal thieving gloves when clothes dyeing is added
-- type: listing
-  id: UplinkgClothingThievingGloves
-  name: uplink-clothing-chameleon-thieving-gloves-name
-  description: uplink-clothing-chameleon-thieving-gloves-desc
-  productEntity: ClothingHandsChameleonThief
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 3
-  cost:
-    Telecrystal: 3 # ADT-Tweak 4>3
-  categories:
-  - UplinkWearables
-
 - type: listing
   id: UplinkClothingOuterVestWeb
   name: uplink-clothing-outer-vest-web-name
@@ -1638,21 +1718,19 @@
   categories:
   - UplinkWearables
 
-#ADT tweak start
-# - type: listing
-  # id: UplinkHardsuitSyndie
-  # name: uplink-hardsuit-syndie-name
-  # description: uplink-hardsuit-syndie-desc
-  # icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndicate.rsi, state: icon }
-  # productEntity: ClothingBackpackDuffelSyndicateHardsuitBundle
-  # discountCategory: veryRareDiscounts
-  # discountDownTo:
-  #   Telecrystal: 4
-  # cost:
-  #   Telecrystal: 8
-  # categories:
-  # - UplinkWearables
-#ADT tweak end
+- type: listing
+  id: UplinkHardsuitSyndie
+  name: uplink-hardsuit-syndie-name
+  description: uplink-hardsuit-syndie-desc
+  icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndicate.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateHardsuitBundle
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 4
+  cost:
+    Telecrystal: 7 # ADT-Tweak 8 - 7
+  categories:
+   - UplinkWearables
 
 - type: listing
   id: UplinkClothingOuterArmorRaid
@@ -1670,21 +1748,19 @@
       tags:
       - NukeOpsUplink
 
-#ADT tweak start
-# - type: listing
-#   id: UplinkHardsuitSyndieElite
-#   name: uplink-hardsuit-syndieelite-name
-#   description: uplink-hardsuit-syndieelite-desc
-#   icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndieelite.rsi, state: icon }
-#   productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
-#   discountCategory: rareDiscounts
-#   discountDownTo:
-#     Telecrystal: 7
-#   cost:
-#     Telecrystal: 12
-#   categories:
-#   - UplinkWearables
-#ADT tweak end
+- type: listing
+  id: UplinkHardsuitSyndieElite
+  name: uplink-hardsuit-syndieelite-name
+  description: uplink-hardsuit-syndieelite-desc
+  icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndieelite.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 7
+  cost:
+    Telecrystal: 11 # ADT-Tweak 12 -> 11
+  categories:
+  - UplinkWearables
 
 - type: listing
   id: UplinkClothingOuterHardsuitJuggernaut
@@ -1708,7 +1784,7 @@
   description: uplink-clothing-eyes-hud-syndicate-desc
   productEntity: ClothingEyesHudSyndicate
   cost:
-    Telecrystal: 2
+    Telecrystal: 4 # ADT-Tweak 2 -> 4 так как в комплекте термалы.
   categories:
     - UplinkWearables
   conditions:
@@ -1794,6 +1870,13 @@
     Telecrystal: 10 # ADT-Tweak 26>10
   categories:
   - UplinkPointless
+  #ADT-tweak-start
+  conditions:
+    - !type:BuyerWhitelistCondition
+      blacklist:
+        components:
+          - SurplusBundle
+  #ADT-tweak-end
 
 - type: listing
   id: UplinkOutlawHat
@@ -2157,7 +2240,7 @@
   discountDownTo:
     Telecrystal: 2
   cost:
-    Telecrystal: 4 # ADT-Tweak 5>4
+    Telecrystal: 3
   categories:
   - UplinkJob
   conditions:
@@ -2189,6 +2272,17 @@
     - Mime
 
 - type: listing
+  id: UplinkContrabandLighter
+  name: uplink-contraband-lighter-name
+  description: uplink-contraband-lighter-desc
+  icon: { sprite:  Objects/Tools/Lighters/syndielighter.rsi, state: icon}
+  productEntity: UplinkLighterBox
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkPointless
+
+- type: listing
   id: UplinkSmugglerSatchel
   name: uplink-smuggler-satchel-name
   description: uplink-smuggler-satchel-desc
@@ -2200,6 +2294,24 @@
     Telecrystal: 2
   categories:
   - UplinkDeception
+
+- type: listing
+  id: UplinkAcolyteArmor
+  name: uplink-acolyte-armor-name
+  description: uplink-acolyte-armor-desc
+  icon: { sprite: Clothing/OuterClothing/Armor/cult_armour.rsi, state: icon}
+  productEntity: ClothingBackpackDuffelAcolyteBundle
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 3
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Chaplain
 
 - type: listing
   id: UplinkSawAdvanced
@@ -2218,3 +2330,20 @@
   - !type:BuyerJobCondition
     whitelist:
     - MedicalDoctor
+
+- type: listing
+  id: uplinkBriefcaseGun
+  name: uplink-briefcase-gun-name
+  description: uplink-briefcase-gun-desc
+  productEntity: WeaponSubMachineGunBriefcase
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 10
+  cost:
+    Telecrystal: 15
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Lawyer

@@ -10,13 +10,6 @@
   - CutterMachineCircuitboard
   - BorgChargerCircuitboard
 
-- type: latheRecipePack
-  id: CircuitFloorsStatic
-  recipes:
-  - FloorGreenCircuit
-  - FloorBlueCircuit
-  - FloorRedCircuit
-
 ## Dynamic
 
 - type: latheRecipePack
@@ -30,6 +23,7 @@
   - SignallerAdvanced
   # - DeviceQuantumSpinInverter #ADT_Tweak - временно удалено до решения всех багов предмета
   - DeviceDesynchronizer
+  - ClothingBackpackHarmpack
 
 - type: latheRecipePack
   id: ScienceClothing
@@ -41,12 +35,15 @@
   - ClothingBackpackHolding
   - ClothingBackpackSatchelHolding
   - ClothingBackpackDuffelHolding
+  - ADTBotanistBagOfHolding #ADT-Tweak
+  - ADTClothingBeltManipulator # ADT-Tweak
 
 - type: latheRecipePack
   id: PowerCells
   recipes:
-  # - PowerCellMicroreactor ADT tweak
+  # - PowerCellMicroreactor #ADT-tweak
   - PowerCellHigh
+  # - PowerCellHyper #ADT-tweak
 
 - type: latheRecipePack
   id: ScienceWeapons
@@ -60,16 +57,6 @@
   - WeaponTetherGun
   - WeaponGauntletGorilla
   - WeaponLaserSvalinn # ADT tweak
-
-- type: latheRecipePack
-  id: FauxTiles
-  recipes:
-  - FauxTileAstroGrass
-  - FauxTileMowedAstroGrass
-  - FauxTileJungleAstroGrass
-  - FauxTileAstroIce
-  - FauxTileAstroSnow
-  - FauxTileAstroAsteroidSand
 
 # Only contains parts for making basic modular grenades, no actual explosives
 - type: latheRecipePack
@@ -96,6 +83,7 @@
   - AnomalyVesselCircuitboard
   - AnomalyVesselExperimentalCircuitboard
   - AnomalySynchronizerCircuitboard
+  - ADTBotanicalSeedDNAManipulatorCircuitboard #ADT-Tweak
   - APECircuitboard
   - ArtifactAnalyzerMachineCircuitboard
   - ArtifactCrusherMachineCircuitboard

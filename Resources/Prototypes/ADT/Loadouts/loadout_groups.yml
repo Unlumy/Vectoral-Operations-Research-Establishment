@@ -71,6 +71,15 @@
   - ADTClothingHeadsetCargo
   - ADTClothingHeadsetMining
 
+- type: loadoutGroup
+  id: ADTCentcomConsultantEars
+  name: loadout-ccc-ears-adt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - HeadsetAltCentCom
+  - HeadsetCentCom
+
 # MAGISTRATE
 
 - type: loadoutGroup
@@ -258,6 +267,7 @@
   - SecurityOfficerWintercoat
   - ADTSeniorOfficerArmor
   - ADTArmorVestHidden
+  - ADTCoatSecurity
 
 # SENIOR PHYSICIAN
 
@@ -321,6 +331,7 @@
   minLimit: 0
   loadouts:
   - LatexGloves
+  - ADTGlovesLatexBlack
   - ADTPurpleGloves
   - RobohandsGloves
 
@@ -426,6 +437,144 @@
   loadouts:
   - ADTClothingOuterWinterBlueshield
   - ADTClothingBlueshieldArmor
+
+# CENTRAL COMMAND CONSULTANT
+
+- type: loadoutGroup
+  id: ADTCentcomConsultantJumpsuit
+  name: loadout-group-ccc-jumpsuit
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ADTJumpsuitССС
+  - ADTJumpskirtCCC
+  - ADTJumpsuitCCCFormal
+  - ADTJumpskirtCCCFormal
+  - CentcomOfficer
+  - ADTJumpskirtTurtleneckGreen
+
+- type: loadoutGroup
+  id: ADTCentcomConsultantHead
+  name: loadout-group-ccc-head
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ADTConsultantCentcomCap
+  - Centcomcap
+
+- type: loadoutGroup
+  id: ADTCentcomConsultantNeck
+  name: loadout-group-ccc-neck
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ScarfStripedCentcom
+
+- type: loadoutGroup
+  id: ADTCentcomConsultantBack
+  name: loadout-group-ccc-back
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - CentcomBackpack
+  - SatchelCentcom
+  - DuffelCentcom
+
+- type: loadoutGroup
+  id: ADTCentcomConsultantOuterClothing
+  name: loadout-group-ccc-outer-clothing
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - CoatCCC
+  - CoatCentCom
+
+- type: loadoutGroup
+  id: ADTCentcomConsultantShoes
+  name: loadout-group-ccc-shoes
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - BootsJack
+  - BootsLaceup
+
+- type: loadoutGroup
+  id: ADTCentcomConsultantHands
+  name: loadout-group-ccc-hands
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ADTGlovesLatex
+  - ADTGlovesLatexBlack
+  - ADTGreenGloves
+
+- type: loadoutGroup
+  id: ADTCentcomConsultantSocks
+  name: loadout-group-ccc-socks
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ADTUnderwearStockingsCentcom
+  - ADTUnderwearSocksKneeCentcom
+  - ADTUnderwearSocksCentcom
+  - ADTUnderwearSocksNormal
+  - ADTUnderwearSocksHigh
+  - ADTUnderwearSocksShort
+  - ADTUnderwearSocksThigh
+  - ADTUnderwearStockings
+  - ADTUnderwearSocksComfyBlue
+  - ADTUnderwearSocksComfyGrey
+  - ADTUnderwearSocksComfyRed
+  - ADTUnderwearSocksComfyViolet
+  - ADTUnderwearSocksBee
+  - ADTUnderwearSocksBeeThigh
+  - ADTUnderwearSocksCoder
+  - ADTUnderwearStockingsLace
+  - ADTUnderwearStockingsBlack
+  - ADTUnderwearStockingsComfyBlue
+  - ADTUnderwearStockingsComfyGrey
+  - ADTUnderwearStockingsComfyRed
+  - ADTUnderwearStockingsComfyViolet
+  - ADTUnderwearSocksAzure
+  - ADTUnderwearSocksKneeAzure
+  - ADTUnderwearSocksThighAzure
+  - ADTUnderwearSocksBlack
+  - ADTUnderwearSocksKneeBlack
+  - ADTUnderwearSocksThighBlack
+  - ADTUnderwearSocksCyan
+  - ADTUnderwearSocksKneeCyan
+  - ADTUnderwearSocksThighCyan
+  - ADTUnderwearSocksFurr
+  - ADTUnderwearSocksKneeFurr
+  - ADTUnderwearSocksThighFurr
+  - ADTUnderwearSocksGreen
+  - ADTUnderwearSocksKneeGreen
+  - ADTUnderwearSocksThighGreen
+  - ADTUnderwearSocksHomelander
+  - ADTUnderwearSocksKneeHomelander
+  - ADTUnderwearSocksThighHomelander
+  - ADTUnderwearSocksHotpink
+  - ADTUnderwearSocksKneeHotpink
+  - ADTUnderwearSocksThighHotpink
+  - ADTUnderwearSocksOrange
+  - ADTUnderwearSocksKneeOrange
+  - ADTUnderwearSocksThighOrange
+  - ADTUnderwearSocksPink
+  - ADTUnderwearSocksKneePink
+  - ADTUnderwearSocksThighCreepy
+  - ADTUnderwearSocksKneeFishnet
+  - ADTUnderwearSocksFullFishnet
+  - ADTUnderwearSocksKneeThin
+  - ADTUnderwearSocksThighThin
+  - ADTUnderwearSocksThighBlue
+  - ADTUnderwearSocksThighFishnet
+  - ADTUnderwearSocksThighGrey
+  - ADTUnderwearSocksThighPantyhose
+  - ADTUnderwearSocksThighPurple
+  - ADTUnderwearSocksThighRed
+  - ADTUnderwearSocksYellow
+  - ADTUnderwearSocksKneeYellow
+  - ADTUnderwearSocksThighYellow
 
 # WARDEN
 
@@ -560,6 +709,7 @@
   maxLimit: 1
   loadouts:
   - ADTHandsGlovesLatex
+  - ADTGlovesLatexBlack
   - ADTHandsGlovesNitrile
 
   # Eyes
@@ -601,34 +751,64 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - ADTChefCqc
+  - ADTChefManual
 
-## GUARD OFFICER (НАДЗИРАТЕЛЬ)
-
-# Голова
-
-  #head
 - type: loadoutGroup
-  id: ADTGuardOfficerHead
-  name: loadout-guardofficer-head-adt
+  id: ADTChefGloves
+  name: loadout-group-chef-gloves-adt
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - ADTHeadHatGuardOfficer
-  - ADTHeadHatGuardGreyOfficer
-  - ADTHeadHatGuardOfficerMaster
+  - ADTWhiteGloves
+  - ADTRedGloves
 
+- type: loadoutGroup
+  id: ADTChefNeck
+  name: loadout-group-chef-neck-adt
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ADTClothingNecChefShawl
+
+## CORRECTIONS OFFICER (НАДЗИРАТЕЛЬ)
+
+# Голова
+- type: loadoutGroup
+  id: ADTCorrectionsOfficerHead
+  name: loadout-corrections-officer-head-adt
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ADTHeadHatCorrectionsOfficer
+  - ADTHeadHatCorrectionsOfficerGrey
 
 # Униформа
 - type: loadoutGroup
-  id: ADTGuardOfficerJumpsuit
-  name: loadout-guardofficer-jumpsuit-adt
+  id: ADTCorrectionsOfficerJumpsuit
+  name: loadout-corrections-officer-jumpsuit-adt
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - ADTUniformJumpsuitGuardOfficer
-  - ADTUniformJumpsuitGreyGuardOfficer
-  - ADTUniformJumpsuitGuardOfficerMaster
+  - ADTJumpsuitCorrectionsOfficer
+  - ADTJumpsuitCorrectionsOfficerGrey
+  - ADTJumpsuitCorrectionsOfficerLight
+  - ADTJumpskirtCorrectionsOfficer
+
+# Верхняя одежда
+- type: loadoutGroup
+  id: ADTCorrectionsOfficerOuterClothing
+  name: loadout-corrections-officer-outerclothing-adt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ADTCoatSecurity
+  - ADTCoatCorrectionsOfficerGrey
+  - ArmorVest
+  - ArmorVestSlim
+  - SecurityOfficerWintercoat
+  - ADTArmorVestHidden
+
+# ПОЯСА КАКИЕ-ТО
 
 - type: loadoutGroup
   id: ADTChaplainBelt
@@ -654,6 +834,14 @@
   loadouts:
   - ADTClothingUniformJumpsuitSalvageSpecialist
 
+- type: loadoutGroup
+  id: ADTSalvageSpecialistNeck
+  name: loadout-salvage-specialist-neck-adt
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ADTNeckSalvageSpecialistCape
+
 # ШАХТЁР
 - type: loadoutGroup
   id: ADTMinerJumpsuit
@@ -672,7 +860,7 @@
   - SalvageSpecialistDuffel
 
 - type: loadoutGroup
-  id: ADTMinerSpecialistEars
+  id: ADTMinerEars
   name: loadout-miner-ears-adt
   minLimit: 1
   maxLimit: 1
@@ -682,18 +870,18 @@
 
 # Плащи
 - type: loadoutGroup
-  id: ADTMinerSpecialistNeck
+  id: ADTMinerNeck
   name: loadout-miner-neck-adt
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - ADTNeckSalvageSpecialistCCape
-  - ADTNeckSalvageSpecialistSCape
-  - ADTNeckSalvageSpecialistGCape
-  - ADTNeckSalvageSpecialistPCape
-  - ADTNeckSalvageSpecialistECape
-  - ADTNeckSalvageSpecialistDCape
-  - ADTNeckSalvageSpecialistRCape
+  - ADTNeckMinerCCape
+  - ADTNeckMinerSCape
+  - ADTNeckMinerGCape
+  - ADTNeckMinerPCape
+  - ADTNeckMinerECape
+  - ADTNeckMinerDCape
+  - ADTNeckMinerRCape
 
 - type: loadoutGroup
   id: ADTMinerOuterClothing
@@ -722,22 +910,6 @@
   - ADTFootWrapsHighBr
   - ADTFootWrapsBl
   - ADTFootWrapsHighBl
-
-# Плащи
-- type: loadoutGroup
-  id: ADTSalvageSpecialistNeck
-  name: loadout-salvage-specialist-neck-adt
-  minLimit: 0
-  maxLimit: 1
-  loadouts:
-  - ADTNeckSalvageSpecialistCCape
-  - ADTNeckSalvageSpecialistSCape
-  - ADTNeckSalvageSpecialistGCape
-  - ADTNeckSalvageSpecialistPCape
-  - ADTNeckSalvageSpecialistECape
-  - ADTNeckSalvageSpecialistDCape
-  - ADTNeckSalvageSpecialistRCape
-
 
 ## ДЕТЕКТИВ
 
@@ -780,6 +952,98 @@
   loadouts:
   - ADTClothingOuterApronBarberLoadOut
 
+## Клоун
+
+- type: loadoutGroup
+  id: ADTClownMask
+  name: loadout-group-clown-mask-adt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ADTClothingMaskClown
+  - ADTClothingMaskClownAbyss
+
+- type: loadoutGroup
+  id: ADTClownGloves
+  name: loadout-group-clown-gloves-adt
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ADTWhiteGloves
+  - ADTRedGloves
+
+- type: loadoutGroup
+  id: ADTClownPocket1
+  name: loadout-group-clown-pocket1-adt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ADTBikeHorn
+  - ADTBikeHornAbyss
+
+- type: loadoutGroup
+  id: ADTClownPocket2
+  name: loadout-group-clown-pocket2-adt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ADTClownRecorder
+  - ADTToyHammer
+  - ADTToyHammerAbyss
+
+## Музыкант
+
+- type: loadoutGroup
+  id: ADTMusicianGloves
+  name: loadout-group-musician-gloves-adt
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ADTBlackGloves
+  - ADTWhiteGloves
+  - ADTRedGloves
+
+## Бармен
+
+- type: loadoutGroup
+  id: ADTBartenderGloves
+  name: loadout-group-bartender-gloves-adt
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ADTBlackGloves
+  - ADTWhiteGloves
+  - ADTRedGloves
+  - ADTBrownGloves
+
+## Сервисный работник
+
+- type: loadoutGroup
+  id: ADTServiceWorkerGloves
+  name: loadout-group-service-worker-gloves-adt
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ADTBlackGloves
+  - ADTWhiteGloves
+
+- type: loadoutGroup
+  id: ADTServiceWorkerJumpsuit
+  name: loadout-group-service-worker-jumpsuit-adt
+  loadouts:
+  - BartenderJumpsuit
+  - BartenderJumpskirt
+  - ADTClothingUniformJumpsuitTuxedo
+
+# Боксёр
+
+- type: loadoutGroup
+  id: ADTBoxerHead
+  name: loadout-group-boxer-head-adt
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ADTClothingHeadHatGladiator
 
 # Alts PDA start
 - type: loadoutGroup
@@ -801,6 +1065,8 @@
   loadouts:
   - BartenderPDA
   - ADTMixologistPDA
+  - ADTTavernkeepPDA
+  - ADTBaristaPDA
 
 - type: loadoutGroup
   id: ADTChefPDA
@@ -812,6 +1078,16 @@
   - ADTBakerPDA
   - ADTButcherPDA
   - ADTPizzaioloPDA
+  - ADTConfectionerPDA
+
+- type: loadoutGroup
+  id: ADTServiceWorkerPDA
+  name: loadout-group-service-worker-id-adt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ADTServiceWorkerPDA
+  - ADTWaiterPDA
 
 - type: loadoutGroup
   id: ADTMedicalInternPDA
@@ -830,6 +1106,15 @@
   - AtmosPDA
   - ADTLifeSupportTechPDA
   - ADTPlasmaScientistPDA
+
+- type: loadoutGroup
+  id: ADTQuartermasterPDA
+  name: loadout-group-quartermaster-id-adt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - QuartermasterPDA
+  - ADTIntendantPDA
 
 - type: loadoutGroup
   id: ADTCargoPDA
@@ -858,6 +1143,44 @@
   - ClownPDA
   - ADTJesterPDA
   - ADTFoolPDA
+
+- type: loadoutGroup
+  id: ADTMusicianPDA
+  name: loadout-group-musician-id-adt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ADTMusicianPDA
+  - ADTPerformerPDA
+  - ADTConcertmasterPDA
+  - ADTComposerPDA
+  - ADTBardPDA
+  - ADTDJPDA
+
+- type: loadoutGroup
+  id: ADTReporterPDA
+  name: loadout-group-reporter-id-adt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ADTReporterPDA
+  - ADTJournalistPDA
+
+- type: loadoutGroup
+  id: ADTBoxerPDA
+  name: loadout-group-boxer-id-adt
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ADTBoxerPDA
+  - ADTKaratekaPDA
+  - ADTKickboxerPDA
+  - ADTSavatistPDA
+  - ADTHandToHandCombatMasterPDA
+  - ADTMMAFighterPDA
+  - ADTJudoistPDA
+  - ADTCoachPDA
+  - ADTGladiatorPDA
 
 - type: loadoutGroup
   id: ADTDetectivePDA
@@ -974,17 +1297,25 @@
   - CMOPDA
   - ADTCMOPDA
 
-- type: loadoutGroup
-  id: ADTQuartermasterPDA
-  name: loadout-group-quartermaster-id
-  minLimit: 1
-  maxLimit: 1
-  loadouts:
-  - QuartermasterPDAloadout
-  - ADTintendantPDAloadout
-
-
 # Alts PDA end
+
+# Miscellaneous
+
+- type: loadoutGroup
+  id: ADTSprayPaints
+  name: loadout-group-spray-paints
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - ADTSprayPaintRed
+  - ADTSprayPaintOrange
+  - ADTFunnyPaintYellow
+  - ADTSprayPaintGreen
+  - ADTSprayPaintBlue
+  - ADTSprayPaintPurple
+  - ADTFunnyPaint
+  - ADTSprayPaintWhite
+  - ADTSprayPaintBlack
 
 # ОЧЕНЬ ПРОШУ ДЕЛАТЬ НОВЫЕ ГРУППЫ НАД НИЖНИМ БЕЛЬЁМ А НЕ ПОД НИМ. ИНАЧЕ Я ЁЖИКОВ НА ВАС НАТРАВЛЮ И ВАМ КАПУТ.
 # Н А Д Е Ю С Ь  В Ы  М Е Н Я  У С Л Ы Ш А Л И ! ! !

@@ -63,10 +63,13 @@
   - type: Clothing
     sprite: ADT/Clothing/Eyes/Glasses/meson.rsi #ADT tweak
   - type: MesonVisionItem #ADT tweak
-  - type: ItemToggle #ADT tweak
   # - type: EyeProtection #ADT tweak
   - type: IdentityBlocker
     coverage: EYES
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
   - type: ClothingGrantComponent #ADT-Tweak
     component:
     - type: SupermatterHallucinationImmune
@@ -130,6 +133,8 @@
     sprite: Clothing/Eyes/Glasses/outlawglasses.rsi
   - type: VisionCorrection
   - type: IdentityBlocker
+  - type: StaticPrice
+    price: 500
 
 - type: entity
   parent: ClothingEyesBase
@@ -144,6 +149,7 @@
   - type: Tag
     tags:
     - HamsterWearable
+    - PetWearable
     - WhitelistChameleon
   - type: IdentityBlocker
     coverage: EYES
@@ -160,6 +166,7 @@
   - type: Tag
     tags:
     - Sunglasses
+    - PetWearable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -182,6 +189,7 @@
   - type: Tag
     tags:
     - HamsterWearable
+    - PetWearable
     - WhitelistChameleon
   - type: GuideHelp
     guides:
@@ -206,6 +214,7 @@
   - type: Tag
     tags:
     - HamsterWearable
+    - PetWearable
     - WhitelistChameleon
   - type: IdentityBlocker
     coverage: EYES
@@ -245,8 +254,7 @@
   - type: GroupExamine
   - type: IdentityBlocker
     coverage: EYES
-  - type: ThermalVisionItem # ADT tweak
-  - type: ItemToggle  # ADT tweak
+  - type: ThermalVisionItem # ADT-tweak
 
 - type: entity
   parent: ClothingEyesBase
@@ -261,9 +269,13 @@
     - type: SolutionScanner
     - type: IdentityBlocker
       coverage: EYES
+    - type: Tag
+      tags:
+      - PetWearable
+      - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingEyesBase, BaseMajorContraband]
+  parent: [ClothingEyesBase, BaseHighlyIllegalContraband]
   id: ClothingEyesVisorNinja
   name: ninja visor
   description: An advanced visor protecting a ninja's eyes from flashing lights.
@@ -274,8 +286,6 @@
     sprite: Clothing/Eyes/Glasses/ninjavisor.rsi
   - type: FlashImmunity
   - type: NightVisionItem # ADT tweak
-  - type: ItemToggle  # ADT tweak
-  - type: ThermalVisionItem # ADT tweak
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -285,7 +295,7 @@
           False: { state: icon }
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesGlassesNoir
   name: noir-tech glasses
   description: A pair of glasses that simulate what the world looked like before the invention of color.
@@ -299,7 +309,7 @@
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
-  - type: BlackAndWhiteOverlay
+  - type: NoirOverlay
   - type: Tag
     tags:
     - HamsterWearable

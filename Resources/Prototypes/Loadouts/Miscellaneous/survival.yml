@@ -25,7 +25,6 @@
     - DraskSpecies
     - Felinid
     - KoboltSpecies
-    - NovakidSpecies
     - Shadekin
     - TajaranSpecies
     - UrsusSpecies
@@ -78,11 +77,46 @@
     - BoxHugNitrogen
 
 # Mime
+- type: loadoutEffectGroup
+  id: OxygenBreatherMime
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Arachnid
+    - Diona
+    - Dwarf
+    - Human
+    - Reptilian
+    # #Corvax-Species-Start # ADT-Tweak: У нас есть свои айди
+    # - Vulpkanin
+    # - CorvaxVulpkanin
+    # - Tajaran
+    # #Corvax-Species-End
+    # ADT-Tweak start
+    - DemonSpecies
+    - VulpkaninSpecies
+    - KoboltSpecies
+    - DraskSpecies
+    - Resomi
+    - TajaranSpecies
+    - Felinid
+    - Shadekin
+    - UrsusSpecies
+    # ADT-Tweak end
+
+
+- type: loadoutEffectGroup
+  id: OxygenBreatherMimeMoth
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Moth
+
 - type: loadout
   id: EmergencyOxygenMime
   effects:
   - !type:GroupLoadoutEffect
-    proto: OxygenBreather
+    proto: OxygenBreatherMime
   storage:
     back:
     - BoxMime
@@ -96,6 +130,14 @@
     back:
     - BoxMimeNitrogen
 
+- type: loadout
+  id: EmergencySpeciesMothMime
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherMimeMoth
+  storage:
+    back:
+    - BoxMimeMoth
 
 # Engineering / Extended
 - type: loadout

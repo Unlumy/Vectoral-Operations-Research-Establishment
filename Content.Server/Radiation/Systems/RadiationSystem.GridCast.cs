@@ -21,7 +21,8 @@ public partial class RadiationSystem
         Vector2 WorldPosition)
     {
         public EntityUid? GridUid => Entity.Comp2.GridUid;
-        public float Slope => Entity.Comp1.Slope;
+        public float TerminalDecaySlope => Entity.Comp1.TerminalDecaySlope; // ADT-Tweak
+        public float TerminalDecayDistance => Entity.Comp1.TerminalDecayDistance; // ADT-Tweak
         public TransformComponent Transform => Entity.Comp2;
     }
 
@@ -35,7 +36,7 @@ public partial class RadiationSystem
         stopwatch.Start();
 
         _sources.Clear();
-        _sources.EnsureCapacity(EntityManager.Count<RadiationSourceComponent>());
+        _sources.EnsureCapacity(Count<RadiationSourceComponent>());
 
         var sources = EntityQueryEnumerator<RadiationSourceComponent, TransformComponent>();
         var destinations = EntityQueryEnumerator<RadiationReceiverComponent, TransformComponent>();
@@ -74,7 +75,7 @@ public partial class RadiationSystem
             foreach (var source in _sources)
             {
                 // send ray towards destination entity
-                if (Irradiate(source, destUid, destTrs, destWorld, debug) is not {} ray)
+                if (Irradiate(source, destUid, destTrs, destWorld, debug) is not { } ray)
                     continue;
 
                 // add rads to total rad exposure
@@ -139,10 +140,16 @@ public partial class RadiationSystem
         var dir = destWorld - source.WorldPosition;
 
         // ADT-Tweak start
-        var dist = Math.Max(dir.Length(),0.5f);
+        var dist = Math.Max(dir.Length(), 0.5f);
         if (TryComp(source.Entity.Owner, out EventHorizonComponent? horizon)) // if we have a horizon emit radiation from the horizon,
             dist = Math.Max(dist - horizon.Radius, 0.5f);
-        var rads = source.Intensity / (dist );
+        // Ray enters terminal decay if the distance between source->receiver >TerminalDecayDistance.
+        // Decays at an additional linear rate of TerminalDecaySlope rads per tile past TerminalDecayDistance ontop of the existing hyperbolic function.
+        // Hyperbolic function
+        var rads = source.Intensity / (dist)
+        // Terminal decay function
+        - (dist - source.TerminalDecayDistance > 0 ? (source.TerminalDecaySlope * (dist - source.TerminalDecayDistance)) : 0);
+
         if (rads < 0.01)
             return null;
         // ADT-Tweak end
@@ -155,7 +162,7 @@ public partial class RadiationSystem
         // if source and destination on the same grid it's possible that
         // between them can be another grid (ie. shuttle in center of donut station)
         // however we can do simplification and ignore that case
-        if (GridcastSimplifiedSameGrid && destTrs.GridUid is {} gridUid && source.GridUid == gridUid)
+        if (GridcastSimplifiedSameGrid && destTrs.GridUid is { } gridUid && source.GridUid == gridUid)
         {
             if (!_gridQuery.TryGetComponent(gridUid, out var gridComponent))
                 return ray;
@@ -190,8 +197,8 @@ public partial class RadiationSystem
 
         return ray;
     }
-    
-    /// ADT-Tweak start    
+
+    /// ADT-Tweak start
     /// <summary>
     /// Similar to GridLineEnumerator, but also returns the distance the ray traveled in each cell
     /// </summary>
@@ -285,13 +292,13 @@ public partial class RadiationSystem
             ? destTrs.LocalPosition
             : Vector2.Transform(ray.Destination, grid.Comp2.InvLocalMatrix);
 
-        Vector2 sourceGrid = new(
-            srcLocal.X / grid.Comp1.TileSize,
-            srcLocal.Y / grid.Comp1.TileSize);
+        Vector2i sourceGrid = new(
+            (int)Math.Floor(srcLocal.X / grid.Comp1.TileSize),
+            (int)Math.Floor(srcLocal.Y / grid.Comp1.TileSize));
 
-        Vector2 destGrid = new(
-            dstLocal.X / grid.Comp1.TileSize,
-            dstLocal.Y / grid.Comp1.TileSize);
+        Vector2i destGrid = new(
+            (int)Math.Floor(dstLocal.X / grid.Comp1.TileSize),
+            (int)Math.Floor(dstLocal.Y / grid.Comp1.TileSize));
 
         foreach (var (point,dist) in AdvancedGridRaycast(sourceGrid,destGrid))
         {
@@ -348,7 +355,7 @@ public partial class RadiationSystem
             if (_blockerQuery.TryComp(xform.ParentUid, out var blocker))
             {
                 // ADT-Tweak start
-                var ratio =blocker.RadResistance>2? 1 / (blocker.RadResistance/2):1; 
+                var ratio =blocker.RadResistance>2? 1 / (blocker.RadResistance/2):1;
                 rads *= ratio;
                 // ADT-Tweak end
                 if (rads < 0)

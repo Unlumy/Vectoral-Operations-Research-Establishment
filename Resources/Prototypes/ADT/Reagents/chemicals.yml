@@ -50,7 +50,8 @@
         key: TemporaryBlindness
         component: TemporaryBlindness
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: ADTMethanol
           min: 7
       - !type:PopupMessage
         visualType: MediumCaution
@@ -61,7 +62,8 @@
         - norepinephricacid-effect-darkness
         - norepinephricacid-effect-blindness
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: ADTMethanol
           min: 7
 
 - type: reagent
@@ -72,3 +74,35 @@
   color: "#09590a"
   boilingPoint: 1500
   meltingPoint: 2500
+
+- type: reagent
+  id: ADTThermolyne
+  name: reagent-name-thermolyne
+  group: Medicine
+  desc: reagent-desc-thermolyne
+  physicalDesc: reagent-physical-desc-burning
+  flavor: peppery
+  color: "#ff5f00"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Cold: -10
+            Heat: -5
+      - !type:AdjustTemperature
+        conditions:
+        - !type:TemperatureCondition
+          max: 100
+        amount: 20000 # thermal energy, not temperature!
+      - !type:AdjustTemperature
+        conditions:
+        - !type:TemperatureCondition
+          min: 1
+        amount: 20000
+      - !type:PopupMessage
+        type: Local
+        visualType: Medium
+        messages: [ "leporazine-effect-temperature-adjusting" ]
+        probability: 0.2

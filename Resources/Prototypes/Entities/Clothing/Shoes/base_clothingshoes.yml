@@ -10,7 +10,7 @@
     state: icon
   - type: Item
     size: Normal
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
     solutions:
@@ -22,6 +22,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - WhitelistChameleon
     - ADTShoesSacrifice # ADT Tweak
   - type: ProtectedFromStepTriggers
@@ -34,6 +35,8 @@
       path: /Audio/ADT/Entities/sneakers_land.ogg
   - type: CoveredSlot
     slots: [socks]
+  - type: HidesSlots
+    hidesSlots: [ SOCKS ]
   # ADT End
 
 - type: entity
@@ -46,6 +49,9 @@
     spawned:
     - id: MaterialCloth1
       amount: 1
+  - type: PhysicalComposition # 50% of the amount of cloth you'd obtain upon butchering
+    materialComposition:
+      Cloth: 50
 
 # stuff common to all military boots
 - type: entity
@@ -58,6 +64,7 @@
     slots:
       item:
         name: clothing-boots-sidearm
+        priority: 4
         whitelist:
           tags:
           - Knife

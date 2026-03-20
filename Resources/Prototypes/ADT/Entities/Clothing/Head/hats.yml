@@ -93,39 +93,29 @@
   - type: Clothing
     sprite: ADT/Clothing/Head/Hats/beret_army.rsi
 
-# Фуражки надзирателя
-- type: entity
-  parent: ClothingHeadBase
-  id: ADTClothingHeadHatsGuardOfficer
-  name: guard officer cap
-  description: Glory to NanoTrasen!
-  components:
-  - type: Sprite
-    sprite: ADT/Clothing/Head/Hats/guard_officer_cap.rsi
-  - type: Clothing
-    sprite: ADT/Clothing/Head/Hats/guard_officer_cap.rsi
+# Надзиратель
 
 - type: entity
   parent: ClothingHeadBase
-  id: ADTClothingHeadHatsGuardOfficerMaster
-  name: guard officer cap master
+  id: ADTClothingHeadHatsCorrectionsOfficerCapGrey
+  name: corrections officer cap
   description: Glory to NanoTrasen!
   components:
   - type: Sprite
-    sprite: ADT/Clothing/Head/Hats/guard_officer_cap_master.rsi
+    sprite: ADT/Clothing/Head/Hats/corrections_officer_cap_grey.rsi
   - type: Clothing
-    sprite: ADT/Clothing/Head/Hats/guard_officer_cap_master.rsi
+    sprite: ADT/Clothing/Head/Hats/corrections_officer_cap_grey.rsi
 
 - type: entity
   parent: ClothingHeadBase
-  id: ADTClothingHeadGreyHatsGuardOfficer
-  name: grey guard officer cap
+  id: ADTClothingHeadHatsCorrectionsOfficerCap
+  name: corrections officer cap
   description: Glory to NanoTrasen!
   components:
   - type: Sprite
-    sprite: ADT/Clothing/Head/Hats/grey_guard_officer_cap.rsi
+    sprite: ADT/Clothing/Head/Hats/corrections_officer_cap.rsi
   - type: Clothing
-    sprite: ADT/Clothing/Head/Hats/grey_guard_officer_cap.rsi
+    sprite: ADT/Clothing/Head/Hats/corrections_officer_cap.rsi
 
 #Береты профессий
 
@@ -244,7 +234,16 @@
   - type: Clothing
     sprite: ADT/Clothing/Head/Hats/trader.rsi
 
-
+- type: entity
+  parent: ClothingHeadBase
+  id: ADTClothingHeadHatConsultantCentcomCap
+  name: Centcom consultant's cap
+  description: A strict cap, indicating your status as a strict overseer of order among the station's heads.
+  components:
+  - type: Sprite
+    sprite: ADT/Clothing/Head/Hats/ccc_cap.rsi
+  - type: Clothing
+    sprite: ADT/Clothing/Head/Hats/ccc_cap.rsi
 
 # Sh4zik hats??? Woah.
 
@@ -477,7 +476,10 @@
     sprite: ADT/Clothing/Head/Hats/drink_cap.rsi
   - type: StaticPrice
     price: 120
-  - type: Drink
+  - type: Edible
+    edible: Drink
+    destroyOnEmpty: false
+    solution: drink
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -516,3 +518,14 @@
     spawned:
     - id: MaterialCloth1
       amount: 2
+
+- type: entity
+  parent: ClothingHeadHatChef
+  id: ADTClothingHeadHatChefRed
+  name: red chef's hat
+  description: Straight from space-Italy!
+  components:
+  - type: Sprite
+    sprite: ADT/Clothing/Head/Hats/chefhat_red.rsi
+  - type: Clothing
+    sprite: ADT/Clothing/Head/Hats/chefhat_red.rsi

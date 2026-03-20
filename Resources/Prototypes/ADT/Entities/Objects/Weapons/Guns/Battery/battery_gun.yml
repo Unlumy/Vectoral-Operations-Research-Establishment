@@ -13,12 +13,23 @@
         map: ["enum.GunVisualLayers.MagUnshaded"]
         shader: unshaded
   - type: Gun
-    fireRate: 1.5
+    fireRate: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser.ogg
   - type: ProjectileBatteryAmmoProvider
     proto: ADTProjectileIonRifle
     fireCost: 125
+  - type: RunAndGunSpreadModifier
+    modifier: 0.1
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 9
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
   - type: MagazineVisuals
     magState: mag
     steps: 5
@@ -38,6 +49,7 @@
   - type: Tag
     tags:
     - ADTBsoWeapon
+  - type: GunExecutionBlacklist
 
 - type: entity
   name: laser rifle
@@ -193,6 +205,17 @@
     zeroVisible: false
   - type: Clothing
     sprite: ADT/Objects/Weapons/Guns/Battery/multifazpistol.rsi
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 9
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  - type: RunAndGunSpreadModifier
+    modifier: 0.1
   - type: Gun
     fireRate: 3
     projectileSpeed: 60
@@ -303,21 +326,19 @@
   description: A self-defense weapon that... turns you into vulpkanin..
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/disabler.rsi
+    sprite: ADT/Objects/Weapons/Guns/Rifles/vulpizator.rsi
     layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]
-      - state: mag-unshaded-0
-        map: ["enum.GunVisualLayers.MagUnshaded"]
-        shader: unshaded
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/disabler.rsi
+    sprite: ADT/Objects/Weapons/Guns/Rifles/vulpizator.rsi
     quickEquip: false
     slots:
       - suitStorage
       - Belt
   - type: BasicEntityAmmoProvider
     proto: ADTProjectilePolyboltVulpkanin
+  - type: DNAGunLocker
 
 - type: entity
   name: ion carbine
@@ -334,12 +355,23 @@
         map: ["enum.GunVisualLayers.MagUnshaded"]
         shader: unshaded
   - type: Gun
-    fireRate: 1.5
+    fireRate: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser.ogg
   - type: ProjectileBatteryAmmoProvider
     proto: ADTProjectileIonRifle
     fireCost: 150
+  - type: RunAndGunSpreadModifier
+    modifier: 0.1
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 7
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
   - type: MagazineVisuals
     magState: mag
     steps: 5
@@ -389,9 +421,10 @@
         pitch: 2
   - type: HitscanBatteryAmmoProvider
     proto: RedLaserBlaster
-    fireCost: 62.5
+    fireCost: 125
   - type: StaticPrice
     price: 50
+  - type: GunExecutionBlacklist
 
 - type: entity
   name: red toy blaster
@@ -410,6 +443,7 @@
   - type: Tag
     tags:
     - ADTToyBlaster
+  - type: GunExecutionBlacklist
 
 - type: entity
   name: blue toy blaster
@@ -428,6 +462,7 @@
   - type: Tag
     tags:
     - ADTToyBlaster
+  - type: GunExecutionBlacklist
 
 - type: entity
   name: green toy blaster
@@ -446,3 +481,50 @@
   - type: Tag
     tags:
     - ADTToyBlaster
+  - type: GunExecutionBlacklist
+
+- type: entity
+  name: CC-7 "Arbiter"
+  parent: [BaseWeaponBattery, ADTBaseMagneticGun]
+  id: ADTWeaponBlasterCC7Arbiter
+  description: Arbiter
+  components:
+  - type: Sprite
+    sprite: ADT/Objects/Weapons/Guns/Battery/cc-7_arbiter.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-unshaded-0
+        map: ["enum.GunVisualLayers.MagUnshaded"]
+        shader: unshaded
+  - type: Gun
+    fireRate: 2
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: ADTBulletYellowLaser
+    fireCost: 125
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: ADTBulletYellowLaser
+      fireCost: 125
+    - proto: ADTBulletDisabler
+      fireCost: 156
+  - type: MagazineVisuals
+    magState: mag
+    steps: 13
+    zeroVisible: true
+  - type: Clothing
+    sprite: ADT/Objects/Weapons/Guns/Battery/cc-7_arbiter.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
+    - Belt
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+  - type: Battery
+    maxCharge: 1625
+    startingCharge: 1625

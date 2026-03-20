@@ -1,23 +1,19 @@
-﻿- type: entity
+- type: entity
   id: BaseBarSign
-  parent: BaseStructure
+  parent: [ BaseWallmountGlass, BaseWallmountMachine ]
   name: bar sign
   abstract: true
   components:
-  - type: MeleeSound
-    soundGroups:
-      Brute:
-        collection: GlassSmash
   - type: WallMount
     arc: 360
   - type: Sprite
-    drawdepth: WallMountedItems
     sprite: Structures/Wallmounts/barsign.rsi
     state: empty
+  #ADT-Tweak Fix
   - type: ApcPowerReceiver
   - type: ExtensionCableReceiver
+  #ADT-Tweak End
   - type: BarSign
-  - type: InteractionOutline
   - type: AccessReader
     access: [["Bar"]]
   - type: ActivatableUIRequiresPower
@@ -31,8 +27,6 @@
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: Appearance
-  - type: Damageable
-    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -55,6 +49,10 @@
   id: BarSign
   name: bar sign
   suffix: Random
+  components:
+  - type: Construction
+    graph: ADTBarSignGraph
+    node: barSign
 
 # Missing appearance components & various other sprite issues.
 #- type: entity

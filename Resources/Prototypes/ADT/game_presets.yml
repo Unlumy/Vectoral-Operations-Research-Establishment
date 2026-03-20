@@ -23,7 +23,7 @@
   showInVote: false
   description: changelings-description
   rules:
-    - ChangelingGameRule
+    - Changeling
     - BasicRoundstartVariation
     - SubGamemodesRule
     - BasicStationEventScheduler
@@ -59,7 +59,7 @@
   showInVote: false
   rules:
     - TraitorDuoGameRule
-    - ChangelingDuoGameRule
+    - ChangelingDuo # ADT tweak
     - HereticDuoGameRule
     - SubGamemodesRule
     - BasicStationEventScheduler
@@ -114,6 +114,7 @@
   alias:
     - dynamicrandom
   name: dynamic-random-title
+  minPlayers: 30
   description: dynamic-random-description
   showInVote: true
   rules:

@@ -1,9 +1,8 @@
 using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.Whitelist;
+using Content.Shared.Throwing;
 using Robust.Shared.GameStates;
-using Robust.Shared.Physics.Components;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Weapons.Melee.Components;
 
@@ -11,7 +10,7 @@ namespace Content.Shared.Weapons.Melee.Components;
 /// This is used for a melee weapon that throws whatever gets hit by it in a line
 /// until it hits a wall or a time limit is exhausted.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 [Access(typeof(MeleeThrowOnHitSystem))]
 public sealed partial class MeleeThrowOnHitComponent : Component
 {
@@ -31,7 +30,7 @@ public sealed partial class MeleeThrowOnHitComponent : Component
     /// Whether or not anchorable entities should be unanchored when hit.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool UnanchorOnHit;
+    public ThrowingUnanchorStrength UnanchorOnHit = ThrowingUnanchorStrength.None;
 
     /// <summary>
     /// How long should this stun the target, if applicable?
@@ -44,6 +43,21 @@ public sealed partial class MeleeThrowOnHitComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool ActivateOnThrown;
+
+    /// <summary>
+    /// Whether the entity can apply knockback this instance of being thrown.
+    /// If true, the entity cannot apply knockback.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public bool ThrowOnCooldown;
+
+    /// <summary>
+    /// Whether this item has hit anyone while it was thrown.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public bool HitWhileThrown;
 }
 
 /// <summary>

@@ -110,7 +110,7 @@ public sealed partial class ChangelingSystem : EntitySystem
         SubscribeLocalEvent<ChangelingComponent, ChangelingRefreshEvent>(OnRefresh);
 
         SubscribeLocalEvent<ChangelingComponent, ChangelingEvolutionMenuActionEvent>(OnShop);
-        SubscribeLocalEvent<ChangelingComponent, ChangelingTransformActionEvent>(OnTransform);
+        SubscribeLocalEvent<ChangelingComponent, ADTChangelingTransformActionEvent>(OnTransform);
 
         SubscribeNetworkEvent<SelectChangelingFormEvent>(OnSelectChangelingForm);
 
@@ -182,7 +182,7 @@ public sealed partial class ChangelingSystem : EntitySystem
         _store.ToggleUi(uid, uid, store);
     }
 
-    public void OnTransform(EntityUid uid, ChangelingComponent component, ChangelingTransformActionEvent args)
+    public void OnTransform(EntityUid uid, ChangelingComponent component, ADTChangelingTransformActionEvent args)
     {
         if (args.Handled)
             return;
@@ -215,7 +215,7 @@ public sealed partial class ChangelingSystem : EntitySystem
 
     private void OnMobState(EntityUid uid, ChangelingComponent component, MobStateChangedEvent args)
     {
-        if (args.NewMobState == MobState.Dead)
+        if (args.NewMobState == MobState.Critical)
         {
             RemoveActions(uid, component);
             return;
@@ -631,6 +631,7 @@ public sealed partial class ChangelingSystem : EntitySystem
             _inventorySystem.TryUnequip(uid, "head", true, true, false);
             _inventorySystem.TryUnequip(uid, "outerClothing", true, true, false);
             component.ChemicalsPerSecond += component.LingArmorRegenCost;
+            component.LingArmorActive = false;
         }
     }
 }

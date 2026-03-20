@@ -1,5 +1,6 @@
 using Content.Server.Emp;
 using Content.Server.Stunnable;
+using Content.Shared.Stunnable;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
@@ -12,6 +13,8 @@ using Robust.Shared.Random;
 using Content.Shared.Damage;
 using Robust.Shared.Prototypes;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Emp;
 
 namespace Content.Server.ADT.Silicon.Systems;
 
@@ -45,10 +48,10 @@ public sealed class SiliconEmpSystem : EntitySystem
         if (duration.TotalSeconds * 0.25 >= 3) // If the EMP blast is strong enough, we stun them.
         // This is mostly to prevent flickering in/out of being stunned. We also cap how long they can be stunned for.
         {
-            _stun.TryParalyze(uid, TimeSpan.FromSeconds(Math.Min(duration.TotalSeconds * 0.25f, 15f)), true, statusComp);
+            _stun.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(Math.Min(duration.TotalSeconds * 0.25f, 15f)));
         }
 
-        _stun.TrySlowdown(uid, duration, true, _random.NextFloat(0.50f, 0.70f), _random.NextFloat(0.35f, 0.70f), statusComp);
+        _status.TryAddStatusEffect<StunnedStatusEffectComponent>(uid, "SlowedDown", TimeSpan.FromSeconds(duration.TotalSeconds), false);
 
         _status.TryAddStatusEffect<SeeingStaticComponent>(uid, SharedSeeingStaticSystem.StaticKey, duration, true, statusComp);
 
@@ -56,7 +59,7 @@ public sealed class SiliconEmpSystem : EntitySystem
             _slurredSystem.DoSlur(uid, duration * 2, statusComp);
 
         if (_random.Prob(0.6f))
-            _stuttering.DoStutter(uid, duration * 2, false, statusComp);
+            _stuttering.DoStutter(uid, duration * 2, false);
 
         if (_random.Prob(0.7f))
             _status.TryAddStatusEffect<PacifiedComponent>(uid, "Pacified", duration * 0.5, true, statusComp);

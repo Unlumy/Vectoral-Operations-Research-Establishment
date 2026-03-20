@@ -3,6 +3,7 @@
 - type: latheRecipePack
   id: ToolsStatic
   recipes:
+  - VoiceSensor
   - Wirecutter
   - Screwdriver
   - Welder
@@ -12,6 +13,7 @@
   - NetworkConfigurator
   - Signaller
   - SprayPainter
+  - SprayPainterAmmo
   - FlashlightLantern
   - HandheldGPSBasic
   - TRayScanner
@@ -60,8 +62,8 @@
   - PowerDrill
   - WelderExperimental
   - JawsOfLife
-  - Fulton
-  - FultonBeacon
+  # - Fulton #ADT-tweak
+  # - FultonBeacon #ADT-tweak
 
 - type: latheRecipePack
   id: AtmosTools

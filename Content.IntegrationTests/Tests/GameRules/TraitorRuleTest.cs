@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.Antag.Components;
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Presets;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
@@ -8,6 +9,7 @@ using Content.Server.Roles;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Objectives.Components;
 using Robust.Shared.GameObjects;
@@ -20,6 +22,8 @@ public sealed class TraitorRuleTest
 {
     private const string TraitorGameRuleProtoId = "Traitor";
     private const string TraitorAntagRoleName = "Traitor";
+    private static readonly ProtoId<NpcFactionPrototype> SyndicateFaction = "Syndicate";
+    private static readonly ProtoId<NpcFactionPrototype> NanotrasenFaction = "NanoTrasen";
 
     [Test]
     public async Task TestTraitorObjectives()
@@ -76,6 +80,19 @@ public sealed class TraitorRuleTest
         // Opt-in the player for the traitor role
         await pair.SetAntagPreference(TraitorAntagRoleName, true);
 
+        // ADT-tweak start: Clear any existing game rules and disable preset to prevent conflicts
+        await server.WaitAssertion(() =>
+        {
+            var existingRules = entMan.AllComponents<GameRuleComponent>().ToArray();
+            foreach (var rule in existingRules)
+            {
+                entMan.DeleteEntity(rule.Uid);
+            }
+            // Disable preset so StartRound() doesn't create conflicting rules
+            ticker.SetGamePreset((GamePresetPrototype?) null);
+        });
+        // ADT-tweak end
+
         // Add the game rule
         TraitorRuleComponent traitorRule = null;
         await server.WaitPost(() =>
@@ -108,8 +125,8 @@ public sealed class TraitorRuleTest
         // Make sure the player is a traitor.
         var mind = mindSys.GetMind(player)!.Value;
         Assert.That(roleSys.MindIsAntagonist(mind));
-        Assert.That(factionSys.IsMember(player, "Syndicate"), Is.True);
-        Assert.That(factionSys.IsMember(player, "NanoTrasen"), Is.False);
+        Assert.That(factionSys.IsMember(player, SyndicateFaction), Is.True);
+        Assert.That(factionSys.IsMember(player, NanotrasenFaction), Is.False);
         Assert.That(traitorRule.TotalTraitors, Is.EqualTo(1));
         Assert.That(traitorRule.TraitorMinds[0], Is.EqualTo(mind));
 
@@ -121,6 +138,16 @@ public sealed class TraitorRuleTest
         Assert.That(mindComp.Objectives, Is.Not.Empty,
             $"No objectives assigned!");
 
+        // ADT-tweak start: Clean up game rules to prevent leftover components affecting other tests
+        await server.WaitAssertion(() =>
+        {
+            var rules = entMan.AllComponents<GameRuleComponent>().ToArray();
+            foreach (var rule in rules)
+            {
+                entMan.DeleteEntity(rule.Uid);
+            }
+        });
+        // ADT-tweak end
 
         await pair.CleanReturnAsync();
     }

@@ -1,13 +1,11 @@
+
 - type: entity
   parent: BaseSign
   id: BaseFlag
   abstract: true
   components:
-  - type: WallMount
-    arc: 360
   - type: Sprite
-    drawdepth: WallMountedItems
-    sprite: Structures/Wallmounts/flags.rsi
+    sprite: ADT/Structures/Wallmounts/flags.rsi #ADT-Tweak
 
 - type: entity
   parent: BaseFlag
@@ -36,18 +34,14 @@
   - type: Sprite
     state: syndie_flag
 
-#ADT start
-
-# - type: entity
-#   parent: BaseFlag
-#   id: LGBTQFlag
-#   name: LGBTQ flag
-#   description: "Be gay do crime flag"
-#   components:
-#   - type: Sprite
-#     state: lgbtq_flag
-
-#ADT end
+- type: entity
+  parent: BaseFlag
+  id: LGBTQFlag
+  name: LGBTQ flag
+  description: "\"Be gay do crime\" flag."
+  components:
+  - type: Sprite
+    state: lgbtq_flag
 
 - type: entity
   parent: BaseFlag

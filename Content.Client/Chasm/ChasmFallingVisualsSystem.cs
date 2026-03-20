@@ -2,6 +2,7 @@ using Content.Shared.Chasm;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
+using Robust.Shared.Random; //ADT-Tweak
 
 namespace Content.Client.Chasm;
 
@@ -11,6 +12,8 @@ namespace Content.Client.Chasm;
 public sealed class ChasmFallingVisualsSystem : EntitySystem
 {
     [Dependency] private readonly AnimationPlayerSystem _anim = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly IRobustRandom _random = default!; //ADT-Tweak
 
     private readonly string _chasmFallAnimationKey = "chasm_fall";
 
@@ -46,7 +49,7 @@ public sealed class ChasmFallingVisualsSystem : EntitySystem
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
-        sprite.Scale = component.OriginalScale;
+        _sprite.SetScale((uid, sprite), component.OriginalScale);
 
         if (!TryComp<AnimationPlayerComponent>(uid, out var player))
             return;
@@ -58,6 +61,10 @@ public sealed class ChasmFallingVisualsSystem : EntitySystem
     private Animation GetFallingAnimation(ChasmFallingComponent component)
     {
         var length = component.AnimationTime;
+        //ADT-Tweak-Start
+        var direction = _random.Prob(0.5f) ? 1 : -1;
+        var totalRotation = _random.NextFloat(360f, 720f) * direction;
+        //ADT-Tweak-End
 
         return new Animation()
         {
@@ -74,6 +81,19 @@ public sealed class ChasmFallingVisualsSystem : EntitySystem
                         new AnimationTrackProperty.KeyFrame(component.AnimationScale, length.Seconds),
                     },
                     InterpolationMode = AnimationInterpolationMode.Cubic
+                //ADT-Tweak-Start
+                },
+                new AnimationTrackComponentProperty()
+                {
+                    ComponentType = typeof(SpriteComponent),
+                    Property = nameof(SpriteComponent.Rotation),
+                    KeyFrames =
+                    {
+                        new AnimationTrackProperty.KeyFrame(Angle.Zero, 0.0f),
+                        new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(totalRotation), length.Seconds),
+                    },
+                    InterpolationMode = AnimationInterpolationMode.Linear
+                //ADT-Tweak-End
                 }
             }
         };

@@ -57,6 +57,7 @@ public sealed class HereticSystem : EntitySystem
     }
     private void OnHereticStartup(EntityUid uid, HereticComponent component, ComponentStartup args)
     {
+        EnsureComp<PassiveHolyHealingComponent>(uid);
         EnsureComp<HolyDamageMultiplierComponent>(uid);
     }
 

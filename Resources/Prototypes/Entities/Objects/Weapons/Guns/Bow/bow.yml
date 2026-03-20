@@ -20,6 +20,7 @@
   - type: UseDelay
     delay: 1
   - type: GunRequiresWield
+  - type: RunAndGunBlocker # ADT-Tweak
   - type: Gun
     minAngle: 0
     maxAngle: 5
@@ -49,6 +50,7 @@
 - type: entity
   id: BowImprovised
   parent: BaseBow
+  name: improvised shortbow
   components:
   - type: Sprite
     layers:

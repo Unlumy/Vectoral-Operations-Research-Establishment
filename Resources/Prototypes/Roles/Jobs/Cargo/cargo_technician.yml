@@ -22,9 +22,19 @@
 - type: startingGear
   id: CargoTechGear
   equipment:
-    #id: CargoPDA # ADT: different PDAs in loadouts
     ears: ClothingHeadsetCargo
     pocket1: AppraisalTool
   #storage:
     #back:
     #- Stuff
+
+- type: chameleonOutfit
+  id: CargoTechnicianChameleonOutfit
+  job: CargoTechnician
+  equipment:
+    head: ClothingHeadHatCargosoft
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskBreath
+    outerClothing: ClothingOuterWinterCargo
+    neck: ClothingNeckScarfStripedBrown
+    gloves: ClothingHandsGlovesFingerless

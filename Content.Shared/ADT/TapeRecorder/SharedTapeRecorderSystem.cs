@@ -7,6 +7,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Labels.Components;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Content.Shared.Damage.Systems;
 using Content.Shared.TapeRecorder.Components;
 using Content.Shared.TapeRecorder.Events;
 using Content.Shared.Toggleable;
@@ -210,7 +211,7 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
         if (HasComp<FitsInTapeRecorderComponent>(ent))
             return;
 
-        _appearance.SetData(ent, ToggleVisuals.Toggled, false);
+        _appearance.SetData(ent, ToggleableVisuals.Enabled, false);
         AddComp<FitsInTapeRecorderComponent>(ent);
         args.Handled = true;
     }
@@ -223,7 +224,7 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
         if (args.DamageDelta == null || args.DamageDelta.GetTotal() < 5)
             return;
 
-        _appearance.SetData(ent, ToggleVisuals.Toggled, true);
+        _appearance.SetData(ent, ToggleableVisuals.Enabled, true);
 
         RemComp<FitsInTapeRecorderComponent>(ent);
         CorruptRandomEntry(ent);

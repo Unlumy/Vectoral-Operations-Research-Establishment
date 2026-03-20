@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Content.Shared.Chat;
 using Content.Server.Chat.Systems;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.Corvax.TTS;
@@ -26,18 +27,23 @@ public sealed partial class TTSSystem : EntitySystem
     private readonly List<string> _sampleText =
         new()
         {
-            "Съешь же ещё этих мягких французских булок, да выпей чаю.",
-            "Клоун, прекрати разбрасывать банановые кожурки офицерам под ноги!",
-            "Капитан, вы уверены что хотите назначить клоуна на должность главы персонала?",
-            "Эс Бэ! Тут человек в сером костюме, с тулбоксом и в маске! Помогите!!",
-            "Учёные, тут странная аномалия в баре! Она уже съела мима!",
-            "Я надеюсь что инженеры внимательно следят за сингулярностью...",
-            "Вы слышали эти странные крики в техах? Мне кажется туда ходить небезопасно.",
-            "Вы не видели Гамлета? Мне кажется он забегал к вам на кухню.",
-            "Здесь есть доктор? Человек умирает от отравленного пончика! Нужна помощь!",
-            "Вам нужно согласие и печать квартирмейстера, если вы хотите сделать заказ на партию дробовиков.",
-            "Возле эвакуационного шаттла разгерметизация! Инженеры, нам срочно нужна ваша помощь!",
-            "Бармен, налей мне самого крепкого вина, которое есть в твоих запасах!",
+            //ADT-Tweak-Start
+            "Ох-х-хо-хо, ну и погодка.",
+            "Едят ли кошки мошек, едят ли мошки кошек...",
+            "Мне чизбургер с большой колой, пожалуйста.",
+            "А ха ха ха, хорошая шутка.",
+            "СИНГУЛЯРНОСТЬ СБЕЖАЛА!!",
+            "Не хотите ли вы подписать мою петицию?",
+            "Почему все вокруг путают нас с тобой?",
+            "Не произноси это имя!!",
+            "Иногда мне снится сыр...",
+            "Почему... я не вижу потолок?",
+            "Да прибудет с тобой сила.",
+            "Нету ручек нет конфетки.",
+            "Магнус не предавал!",
+            "Так звучит мой голос.",
+            "Здесь был котя... Или же не было?",
+            //ADT-Tweak-End
             "Здесь был котя."
         };
 
@@ -114,7 +120,7 @@ public sealed partial class TTSSystem : EntitySystem
         if (soundData is null) return;
 
         // ADT Languages start
-        var languageSoundData = await GenerateTTS(_language.ObfuscateMessage(uid, message, gen.Replacement, gen.ObfuscateSyllables), speaker);
+        var languageSoundData = await GenerateTTS(_language.ObfuscateMessage(uid, message, gen.Replacement, gen.ObfuscateSyllables, gen.ReplaceEntireMessage), speaker);
         if (languageSoundData is null) return;
         // ADT Languages end
 
@@ -135,10 +141,10 @@ public sealed partial class TTSSystem : EntitySystem
         if (obfSoundData is null) return;
 
         // ADT Languages start
-        var fullLangSoundData = await GenerateTTS(_language.ObfuscateMessage(uid, message, gen.Replacement, gen.ObfuscateSyllables), speaker, true);
+        var fullLangSoundData = await GenerateTTS(_language.ObfuscateMessage(uid, message, gen.Replacement, gen.ObfuscateSyllables, gen.ReplaceEntireMessage), speaker, true);
         if (fullLangSoundData is null) return;
 
-        var obfLangSoundData = await GenerateTTS(_language.ObfuscateMessage(uid, obfMessage, gen.Replacement, gen.ObfuscateSyllables), speaker, true);
+        var obfLangSoundData = await GenerateTTS(_language.ObfuscateMessage(uid, obfMessage, gen.Replacement, gen.ObfuscateSyllables, gen.ReplaceEntireMessage), speaker, true);
         if (obfLangSoundData is null) return;
         // ADT Languages end
 

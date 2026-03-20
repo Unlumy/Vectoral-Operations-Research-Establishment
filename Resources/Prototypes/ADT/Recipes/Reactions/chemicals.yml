@@ -16,6 +16,9 @@
       amount: 2
     Hydrogen:
       amount: 2
+    Plasma:
+      amount: 1
+      catalyst: true
   products:
     ADTMethanol: 3
 
@@ -57,7 +60,7 @@
     Desoxyephedrine:
       amount: 50
   effects:
-  - !type:CreateEntityReactionEffect
+  - !type:SpawnEntity
     entity: ADTFoodMethCrystal
 
 - type: reaction
@@ -69,7 +72,7 @@
     ADTBlueSkyDesoxyephedrine:
       amount: 50
   effects:
-  - !type:CreateEntityReactionEffect
+  - !type:SpawnEntity
     entity: ADTFoodWalterMethCrystal
 
 - type: reaction

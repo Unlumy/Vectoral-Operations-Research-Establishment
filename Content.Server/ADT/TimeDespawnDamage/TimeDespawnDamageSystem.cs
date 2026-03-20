@@ -17,6 +17,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Content.Shared.Forensics.Components;
+using Content.Shared.Damage.Systems;
 public sealed class TimeDespawnDamageSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -93,9 +94,9 @@ public sealed class TimeDespawnDamageSystem : EntitySystem
 
         if (TryComp(entity, out HandsComponent? hands))
         {
-            foreach (var hand in _hands.EnumerateHands(entity, hands))
+            foreach (var hand in _hands.EnumerateHands(entity))
             {
-                _hands.TryDrop(entity, hand, checkActionBlocker: false, doDropInteraction: false, handsComp: hands);
+                _hands.TryDrop(entity, hand, checkActionBlocker: false, doDropInteraction: false);
             }
         }
         QueueDel(entity);

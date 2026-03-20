@@ -13,6 +13,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Item;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Electrocution;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server.ADT.Chaplain.Systems;
 
@@ -56,7 +57,7 @@ public sealed class ForTheWorthySystem : EntitySystem
 
         _damageable.TryChangeDamage(target, damageSpec, origin: source);
 
-        _stun.TryParalyze(target, TimeSpan.FromSeconds(2), true);
+        _stun.TryUpdateParalyzeDuration(target, TimeSpan.FromSeconds(2));
 
         _jittering.DoJitter(target, TimeSpan.FromSeconds(2), true, 80, 8);
 

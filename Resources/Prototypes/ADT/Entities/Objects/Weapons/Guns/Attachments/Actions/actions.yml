@@ -9,12 +9,14 @@
   name: Toggle Optics
   description: Scope
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: ADT/Objects/Weapons/Guns/Attachments/scope_actions.rsi
       state: sniperscope
-    event: !type:ToggleActionEvent
     useDelay: 0.25
+    raiseOnUser: false
+  - type: InstantAction
+    event: !type:ToggleActionEvent
 
 - type: entity
   parent: ADTActionBase
@@ -22,12 +24,14 @@
   name: Cycle Zoom Level
   description: Scope
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: ADT/Objects/Weapons/Guns/Attachments/scope_actions.rsi
       state: sniperscope
-    event: !type:ScopeCycleZoomLevelEvent
+    raiseOnUser: false
     useDelay: 0.25
+  - type: InstantAction
+    event: !type:ScopeCycleZoomLevelEvent
   - type: Tag
     tags:
     - ADTActionCycleZoomLevel
@@ -38,10 +42,12 @@
   name: Toggle Attachable
   description: Toggle an attachable.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: ADT/Objects/Weapons/Guns/Attachments/scope_actions.rsi
       state: sniperscope
+    raiseOnUser: false
+  - type: InstantAction
     event: !type:AttachableToggleActionEvent
 
 - type: Tag

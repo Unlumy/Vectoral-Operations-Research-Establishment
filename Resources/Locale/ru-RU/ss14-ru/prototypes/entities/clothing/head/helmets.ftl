@@ -1,5 +1,7 @@
 ent-ClothingHeadHelmetBase = { ent-ClothingHeadBase }
     .desc = { ent-ClothingHeadBase.desc }
+ent-ClothingHeadHelmetArmoredBase = { ent-ClothingHeadHelmetBase }
+    .desc = { ent-ClothingHeadHelmetBase.desc }
 ent-ClothingHeadHelmetBasic = шлем
     .desc = Стандартная защитная экипировка. Защищает голову от ударов.
 ent-ClothingHeadHelmetBombSuit = сапёрный шлем
@@ -54,3 +56,5 @@ ent-ClothingHeadHelmetJusticeEmpty = { ent-ClothingHeadHelmetJustice }
     .desc = { ent-ClothingHeadHelmetJustice.desc }
 ent-ActionToggleJusticeHelm = Переключить шлем правосудия
     .desc = Включает или выключает шлем правосудия.
+ent-CardHelmet = картонный шлем
+    .desc = Средневековый шлем, сделанный из картона.

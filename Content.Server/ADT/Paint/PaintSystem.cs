@@ -92,7 +92,7 @@ public sealed class PaintSystem : SharedPaintSystem
         if (args.Target is not { Valid: true } target)
             return;
 
-        if (!_openable.IsOpen(entity))
+        if (_openable.IsClosed(entity))
         {
             _popup.PopupEntity(Loc.GetString("paint-closed", ("used", args.Used)), args.User, args.User, PopupType.Medium);
             return;
@@ -107,7 +107,7 @@ public sealed class PaintSystem : SharedPaintSystem
 
         if (PaintCapacity(entity))
         {
-            EnsureComp<PaintedComponent>(target, out PaintedComponent? paint);
+            EnsureComp<ColorPaintedComponent>(target, out ColorPaintedComponent? paint);
             EnsureComp<AppearanceComponent>(target);
 
             paint.Color = entity.Comp.Color; // set the target color to the color specified in the spray paint yml.
@@ -129,7 +129,7 @@ public sealed class PaintSystem : SharedPaintSystem
                         if (_whitelist.IsWhitelistPass(entity.Comp.Blacklist, slotEnt.Value))
                             return;
 
-                        EnsureComp<PaintedComponent>(slotEnt.Value, out PaintedComponent? slotpaint);
+                        EnsureComp<ColorPaintedComponent>(slotEnt.Value, out ColorPaintedComponent? slotpaint);
                         EnsureComp<AppearanceComponent>(slotEnt.Value);
                         slotpaint.Color = entity.Comp.Color;
                         _appearanceSystem.SetData(slotEnt.Value, PaintVisuals.Painted, true);

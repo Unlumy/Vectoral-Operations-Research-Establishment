@@ -19,6 +19,7 @@
     ClothingHeadsetSecurity: 3
     ClothingOuterWinterSec: 2
     ClothingOuterArmorBasic: 2
+    ClothingOuterCoatSecurityOvercoat: 3 #ADT-Tweak
     ClothingNeckScarfStripedRed: 3
     ClothingOuterArmorBasicSlim: 2
     ClothingEyesBlindfold: 1
@@ -26,7 +27,10 @@
     ClothingShoesBootsWinterSec: 2
     ClothingHeadHelmetJustice: 1
     #ADT Clothing 
+    ADTClothingOuterCoatSecurity: 1
     ADTClothingKadet: 4
+    ADTClothingUniformSecurityCadetLight: 2
+    ADTClothingUniformJumpskirtSecurityCadetLight: 2
     ADTClothingHeadHelmetSecCap: 2
     ADTClothingHeadHelmetSecUshanka: 2
     ADTClothingShoesKirzaBoots: 1
@@ -40,6 +44,7 @@
     #ADT Clothing end
   contrabandInventory:
     ClothingMaskClownSecurity: 1
+    ClothingMaskMimeSecurity: 1
     ToyFigurineSecurity: 1
     ToyFigurineWarden: 1
     ToyFigurineHeadOfSecurity: 1

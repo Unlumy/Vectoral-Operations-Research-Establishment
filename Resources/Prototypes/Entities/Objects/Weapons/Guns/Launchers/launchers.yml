@@ -12,13 +12,14 @@
     slots:
     - Back
   - type: Item
-    size: Huge
+    size: Ginormous
   - type: StaticPrice
     price: 500
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
         ents: []
+  - type: GunExecutionBlacklist #ADT-tweak
 
 - type: entity
   name: china lake
@@ -36,7 +37,23 @@
     slots:
     - Back
     - suitStorage
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,4,2
   - type: AmmoCounter
+  - type: RunAndGunSpreadModifier #ADT-tweak
+  # ADT-Tweak start
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 0.75
+    damage:
+      types:
+        Blunt: 14
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  # ADT-Tweak end
   - type: Gun
     fireRate: 1
     selectedMode: SemiAuto
@@ -52,12 +69,15 @@
     proto: GrenadeFrag
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+  - type: GunRequiresWield
+  - type: StaticPrice
+    price: 10000
 
 - type: entity
   parent: [ BaseWeaponLauncher, BaseGunWieldable, BaseMajorContraband ]
   id: WeaponLauncherHydra
   name: hydra
-  description: PLOOP... FSSSSSS
+  description: PLOOP... FSSSSSS...
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Launchers/hydra_launcher.rsi
@@ -69,6 +89,8 @@
     slots:
     - Back
     - suitStorage
+  - type: Item
+    size: Huge
   - type: AmmoCounter
   - type: Gun
     fireRate: 1
@@ -77,6 +99,7 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+  - type: GunRequiresWield
   - type: ContainerContainer
     containers:
       revolver-ammo: !type:Container
@@ -108,6 +131,7 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Launchers/rocket.rsi
+  - type: RunAndGunSpreadModifier #ADT-tweak
   - type: Gun
     fireRate: 0.5
     soundGunshot:
@@ -180,8 +204,9 @@
       type: ContainerContainer
     - type: Clothing
       sprite: Objects/Weapons/Guns/Launchers/pirate_cannon.rsi
+    - type: RunAndGunSpreadModifier #ADT-tweak
     - type: Gun
-      fireRate: 1
+      fireRate: 0.2 # ADT-Tweak 1 -> 0.2
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
     - type: BallisticAmmoProvider
@@ -192,11 +217,6 @@
       proto: CannonBall
       soundInsert:
         path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
-    #ADT-tweak-start
-    - type: UseDelayOnShoot
-    - type: UseDelay
-      delay: 6
-    #ADT-tweak-end
 
 - type: entity
   name: tether gun
@@ -207,7 +227,7 @@
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
     - type: Item
-      storedRotation: -90
+      size: Normal
     - type: TetherGun
       frequency: 5
       dampingRatio: 4
@@ -223,7 +243,7 @@
           map: [ "unshaded" ]
           shader: unshaded
           visible: false
-    - type: ToggleableLightVisuals
+    - type: ToggleableVisuals
       spriteLayer: unshaded
       inhandVisuals:
         left:
@@ -249,7 +269,7 @@
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
     - type: Item
-      storedRotation: -90
+      size: Normal
     - type: ForceGun
       frequency: 15
       dampingRatio: 4
@@ -271,7 +291,7 @@
           map: [ "unshaded" ]
           shader: unshaded
           visible: false
-        - type: ToggleableLightVisuals
+        - type: ToggleableVisuals
           spriteLayer: unshaded
           inhandVisuals:
             left:
@@ -293,6 +313,12 @@
   parent: BaseItem
   id: WeaponGrapplingGun
   components:
+    - type: Item
+      size: Small
+      shape:
+      - 0,0,1,0
+      - 0,1,0,1
+      storedOffset: 0,-6
     - type: AmmoCounter
     - type: GrapplingGun
     - type: Gun
@@ -319,6 +345,7 @@
             True: { state: base-unshaded }
             False: { state: base-unshaded-off }
     - type: PacifismAllowedGun
+    - type: GunExecutionBlacklist #ADT-tweak
 
 # Admeme
 - type: entity
@@ -328,6 +355,8 @@
   suffix: Admeme
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
+    - type: Item
+      size: Normal
     - type: TetherGun
       canTetherAlive: true
       canUnanchor: true
@@ -343,7 +372,7 @@
           map: [ "unshaded" ]
           shader: unshaded
           visible: false
-    - type: ToggleableLightVisuals
+    - type: ToggleableVisuals
       spriteLayer: unshaded
       inhandVisuals:
         left:
@@ -367,6 +396,8 @@
   suffix: Admeme
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
+    - type: Item
+      size: Normal
     - type: ForceGun
       canTetherAlive: true
       canUnanchor: true
@@ -385,7 +416,7 @@
           map: [ "unshaded" ]
           shader: unshaded
           visible: false
-    - type: ToggleableLightVisuals
+    - type: ToggleableVisuals
       spriteLayer: unshaded
       inhandVisuals:
         left:
@@ -410,9 +441,6 @@
   description: It fires large meteors.
   components:
   - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-        - CartridgeRocket
     proto: MeteorMedium
 
 - type: entity
@@ -423,7 +451,4 @@
   description: It fires slow immovable rods.
   components:
   - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-        - CartridgeRocket
     proto: ImmovableRodSlow

@@ -9,10 +9,20 @@
   - type: Sprite
     sprite: ADT/Clothing/Back/blueshield_backpack.rsi
 
+#ЦК
+- type: entity
+  parent: ClothingBackpackSecurity
+  id: ADTClothingCentcomBackpack
+  name: Сentcom's backpack
+  description: The most expensive backpack you've ever seen.
+  components:
+  - type: Sprite
+    sprite: ADT/Clothing/Back/centcom_backpack.rsi
+
 #дамские сумочки
 
 - type: entity
-  parent: ClothingBackpack
+  parent: ClothingBackpackSatchel
   id: ADTClothingBackpackBlackLadySatchel
   name: black lady satchel
   description: Satchel for storage. Wow, whats there? A stolen hearts?

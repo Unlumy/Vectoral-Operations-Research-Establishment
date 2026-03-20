@@ -42,6 +42,7 @@
       75: Dead
   - type: Stamina
     critThreshold: 50
+    animationThreshold: 25
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -240,6 +241,7 @@
       75: Dead
   - type: Stamina
     critThreshold: 50
+    animationThreshold: 25
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -296,8 +298,10 @@
     states:
       Alive:
         Base: golem
-      Critical:
-        Base: dead
+# ADT-Tweak-Start Фикс фикстур
+#      Critical:
+#        Base: dead
+# ADT-Tweak-End
       Dead:
         Base: dead
   - type: MobThresholds

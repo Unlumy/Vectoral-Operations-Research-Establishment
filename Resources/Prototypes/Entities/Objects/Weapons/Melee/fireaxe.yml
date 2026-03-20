@@ -29,7 +29,7 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Slash: 10
+        Slash: 15 # ADT-Tweak 10 -> 15
         Structural: 40
   - type: Item
     size: Ginormous
@@ -55,7 +55,7 @@
 - type: entity
   id: FireAxeFlaming
   name: fire axe
-  parent: [ BaseSyndicateContraband, FireAxe ]
+  parent: [BaseSyndicateContraband, FireAxe]
   description: Why fight fire with an axe when you can fight with fire and axe? Now featuring rugged rubberized handle!
   components:
   - type: MeleeWeapon
@@ -76,21 +76,6 @@
     slots:
     - back
     - suitStorage #ADT_Tweak - чтобы вешать на спину
-# Corvax-HiddenDesc-Start
-  - type: HiddenDescription
-    entries:
-    - label: corvax-hidden-desc-FireAxeFlaming-syndicate
-      whitelistMind:
-        mindRoles:
-        - TraitorRole
-        - NukeopsRole
-    - label: corvax-hidden-desc-FireAxeFlaming-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
 # ADT-Tweak-Start
   - type: Item
     sprite: Objects/Weapons/Melee/fireaxeflaming.rsi

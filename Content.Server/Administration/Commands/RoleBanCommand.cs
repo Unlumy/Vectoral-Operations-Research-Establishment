@@ -23,7 +23,10 @@ public sealed class RoleBanCommand : IConsoleCommand
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IServerDbManager _dbManager = default!;
     [Dependency] private readonly IDiscordBanInfoSender _discordBanInfoSender = default!;
+    [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+
+    private ISawmill? _sawmill;
 
     public string Command => "roleban";
     public string Description => Loc.GetString("cmd-roleban-desc");
@@ -32,12 +35,14 @@ public sealed class RoleBanCommand : IConsoleCommand
     public async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         string target;
-        string job;
+        string role;
         string reason;
         uint minutes;
+
         if (!Enum.TryParse(_cfg.GetCVar(CCVars.RoleBanDefaultSeverity), out NoteSeverity severity))
         {
-            Logger.WarningS("admin.role_ban", "Role ban severity could not be parsed from config! Defaulting to medium.");
+            _sawmill ??= _log.GetSawmill("admin.role_ban");
+            _sawmill.Warning("Role ban severity could not be parsed from config! Defaulting to medium.");
             severity = NoteSeverity.Medium;
         }
 
@@ -45,30 +50,33 @@ public sealed class RoleBanCommand : IConsoleCommand
         {
             case 3:
                 target = args[0];
-                job = args[1];
+                role = args[1];
                 reason = args[2];
                 minutes = 0;
+
                 break;
             case 4:
                 target = args[0];
-                job = args[1];
+                role = args[1];
                 reason = args[2];
 
                 if (!uint.TryParse(args[3], out minutes))
                 {
                     shell.WriteError(Loc.GetString("cmd-roleban-minutes-parse", ("time", args[3]), ("help", Help)));
+
                     return;
                 }
 
                 break;
             case 5:
                 target = args[0];
-                job = args[1];
+                role = args[1];
                 reason = args[2];
 
                 if (!uint.TryParse(args[3], out minutes))
                 {
                     shell.WriteError(Loc.GetString("cmd-roleban-minutes-parse", ("time", args[3]), ("help", Help)));
+
                     return;
                 }
 
@@ -82,19 +90,15 @@ public sealed class RoleBanCommand : IConsoleCommand
             default:
                 shell.WriteError(Loc.GetString("cmd-roleban-arg-count"));
                 shell.WriteLine(Help);
-                return;
-        }
 
-        if (!_proto.HasIndex<JobPrototype>(job))
-        {
-            shell.WriteError(Loc.GetString("cmd-roleban-job-parse",("job", job)));
-            return;
+                return;
         }
 
         var located = await _locator.LookupIdByNameOrIdAsync(target);
         if (located == null)
         {
             shell.WriteError(Loc.GetString("cmd-roleban-name-parse"));
+
             return;
         }
 
@@ -105,7 +109,12 @@ public sealed class RoleBanCommand : IConsoleCommand
         var newRoleBanId = lastRoleBan is not null ? lastRoleBan.Id + 1 : 1;
         //End-ADT-Tweak
 
-        _bans.CreateRoleBan(targetUid, located.Username, shell.Player?.UserId, null, targetHWid, job, minutes, severity, reason, DateTimeOffset.UtcNow);
+        if (_proto.HasIndex<JobPrototype>(role))
+            _bans.CreateRoleBan<JobPrototype>(targetUid, located.Username, shell.Player?.UserId, null, targetHWid, role, minutes, severity, reason, DateTimeOffset.UtcNow);
+        else if (_proto.HasIndex<AntagPrototype>(role))
+            _bans.CreateRoleBan<AntagPrototype>(targetUid, located.Username, shell.Player?.UserId, null, targetHWid, role, minutes, severity, reason, DateTimeOffset.UtcNow);
+        else
+            shell.WriteError(Loc.GetString("cmd-roleban-job-parse", ("job", role)));
         //Start-ADT-Tweak: логи банов для диса
         var banInfo = new BanInfo
         {
@@ -115,7 +124,7 @@ public sealed class RoleBanCommand : IConsoleCommand
             Minutes = minutes,
             Reason = reason,
             Expires = DateTimeOffset.Now + TimeSpan.FromMinutes(minutes),
-            AdditionalInfo = new() { { "role", job } }
+            AdditionalInfo = new() { { "role", role } }
         };
 
         await _discordBanInfoSender.SendBanInfoAsync<RoleBanPayloadGenerator>(banInfo);

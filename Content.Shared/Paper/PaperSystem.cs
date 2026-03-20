@@ -7,6 +7,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Content.Shared.ADT.Chalkboard; // ADT-Tweak: Chalkboard
 using Robust.Shared.Player;
 using Robust.Shared.Audio.Systems;
 using static Content.Shared.Paper.PaperComponent;
@@ -30,6 +31,7 @@ public sealed class PaperSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
     private static readonly ProtoId<TagPrototype> WriteTag = "Write";
+    private static readonly ProtoId<TagPrototype> CrayonTag = "Crayon"; // ADT-Tweak: Chalkboard
 
     private EntityQuery<PaperComponent> _paperQuery;
 
@@ -117,12 +119,21 @@ public sealed class PaperSystem : EntitySystem
         var editable = entity.Comp.StampedBy.Count == 0 || _tagSystem.HasTag(args.Used, WriteIgnoreStampsTag);
         if (_tagSystem.HasTag(args.Used, WriteTag))
         {
+            // ADT-Tweak Start: Chalkboard
+            if (HasComp<ChalkboardComponent>(entity) && !_tagSystem.HasTag(args.Used, CrayonTag))
+            {
+                _popupSystem.PopupClient(Loc.GetString("chalkboard-only-chalk"), entity.Owner, args.User);
+                args.Handled = true;
+                return;
+            }
+            // ADT-Tweak End
+
             if (editable)
             {
                 if (entity.Comp.EditingDisabled)
                 {
                     var paperEditingDisabledMessage = Loc.GetString("paper-tamper-proof-modified-message");
-                    _popupSystem.PopupEntity(paperEditingDisabledMessage, entity, args.User);
+                    _popupSystem.PopupClient(paperEditingDisabledMessage, entity, args.User);
 
                     args.Handled = true;
                     return;
@@ -217,7 +228,7 @@ public sealed class PaperSystem : EntitySystem
     {
         if (!_paperQuery.TryComp(ent, out var paperComp))
         {
-            Log.Warning($"{EntityManager.ToPrettyString(ent)} has a {nameof(RandomPaperContentComponent)} but no {nameof(PaperComponent)}!");
+            Log.Warning($"{ToPrettyString(ent)} has a {nameof(RandomPaperContentComponent)} but no {nameof(PaperComponent)}!");
             RemCompDeferred(ent, ent.Comp);
             return;
         }
@@ -293,13 +304,22 @@ public sealed class PaperSystem : EntitySystem
         }
     }
 
+    public void SetContent(EntityUid entity, string content)
+    {
+        if (!TryComp<PaperComponent>(entity, out var paper))
+            return;
+        SetContent((entity, paper), content);
+    }
+
     public void SetContent(Entity<PaperComponent> entity, string content, bool? doNewline = true) // ADT-BookPrinter
     {
         entity.Comp.Content = content;
+
         // ADT-BookPrinter-Start
         if (doNewline is not null && doNewline.Value)
             entity.Comp.Content += '\n';
         // ADT-BookPrinter-End
+
         Dirty(entity);
         UpdateUserInterface(entity);
 

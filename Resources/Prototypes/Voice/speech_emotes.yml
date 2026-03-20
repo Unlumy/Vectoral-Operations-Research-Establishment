@@ -8,7 +8,8 @@
   whitelist:
     components:
     - Vocal
-
+    tags:
+    - Ipc # Corvax-Species
 #  blacklist:
 #    tags:
 #    - SiliconEmotes ADT Tweak
@@ -114,6 +115,7 @@
   blacklist:
     tags:
     - SiliconEmotes
+    - Ipc # Corvax-Species
   chatMessages: ["chat-emote-msg-sigh"]
   chatTriggers:
     - sigh
@@ -137,6 +139,7 @@
   blacklist:
     tags:
     - SiliconEmotes
+    - Ipc # Corvax-Species
   chatMessages: ["chat-emote-msg-whistle"]
   chatTriggers:
     - whistle
@@ -259,6 +262,114 @@
    - клац
    - клацает
    # Corvax-Localization-End
+
+# ADT-Tweak: Dublicate ID
+# Vulpkanin
+# - type: emote
+#   id: Bark
+#   name: chat-emote-name-bark
+#   category: Vocal
+#   available: false
+#   whitelist:
+#     components:
+#     - Vocal
+#   blacklist:
+#     tags:
+#     - SiliconEmotes
+#   chatMessages: ["chat-emote-msg-bark"]
+#   chatTriggers:
+#   - bark
+#   - barks
+#   - barked
+#   - barking
+
+- type: emote
+  id: Snarl
+  name: chat-emote-name-snarl
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-snarl"]
+  chatTriggers:
+  - snarl
+  - snarls
+  - snarled
+  - snarling
+
+# ADT-Tweak: Dublicate ID
+# - type: emote
+#   id: Whine
+#   name: chat-emote-name-whine
+#   category: Vocal
+#   available: false
+#   whitelist:
+#     components:
+#     - Vocal
+#   blacklist:
+#     tags:
+#     - SiliconEmotes
+#   chatMessages: ["chat-emote-msg-whine"]
+#   chatTriggers:
+#   - whine
+#   - whines
+#   - whined
+#   - whining
+
+# ADT-Tweak: Dublicate ID
+# - type: emote
+#   id: Howl
+#   name: chat-emote-name-howl
+#   category: Vocal
+#   available: false
+#   whitelist:
+#     components:
+#     - Vocal
+#   blacklist:
+#     tags:
+#     - SiliconEmotes
+#   chatMessages: ["chat-emote-msg-howl"]
+#   chatTriggers:
+#   - howl
+#   - howls
+#   - howling
+#   - howled
+# # Corvax-Localization-Start
+#   - воет
+#   - воет.
+#   - воет!
+#   - завывает
+#   - завывает.
+#   - завывает!
+# # Corvax-Localization-End
+
+# ADT-Tweak: Dublicate ID
+# - type: emote
+#   id: Growl
+#   name: chat-emote-name-growl
+#   category: Vocal
+#   available: false
+#   whitelist:
+#     components:
+#     - Vocal
+#   blacklist:
+#     tags:
+#     - SiliconEmotes
+#   chatMessages: ["chat-emote-msg-growl"]
+#   chatTriggers:
+#   - growl
+#   - growls
+#   - growled
+#   - growling
+#   # Corvax-Localization-Start
+#   - рычит
+#   - рычит.
+#   - рычит!
+#   # Corvax-Localization-End
 
 # hand emotes
 - type: emote
@@ -436,6 +547,12 @@
   name: chat-emote-name-deathgasp
   icon: Interface/Emotes/deathgasp.png
   chatMessages: ["chat-emote-msg-deathgasp-monkey"]
+
+- type: emote
+  id: ScurretDeathgasp
+  name: chat-emote-name-deathgasp
+  icon: Interface/Emotes/deathgasp.png
+  chatMessages: ["chat-emote-msg-deathgasp-scurret"]
 
 - type: emote
   id: Buzz

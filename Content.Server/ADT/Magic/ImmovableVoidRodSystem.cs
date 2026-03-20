@@ -1,4 +1,5 @@
 using Content.Server.Heretic.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.Heretic;
 using Content.Shared.Maps;
 using Content.Shared.Stunnable;
@@ -53,7 +54,7 @@ public sealed partial class ImmovableVoidRodSystem : EntitySystem
     private void OnCollide(Entity<ImmovableVoidRodComponent> ent, ref StartCollideEvent args)
     {
         if ((TryComp<HereticComponent>(args.OtherEntity, out var th) && th.CurrentPath == "Void")
-        || HasComp<GhoulComponent>(args.OtherEntity))
+        || HasComp<GhoulComponent>(args.OtherEntity) || HasComp<ChaplainComponent>(args.OtherEntity))
             return;
 
         var power = 1f;
@@ -61,7 +62,7 @@ public sealed partial class ImmovableVoidRodSystem : EntitySystem
             // ascended void heretic will give 6 SECONDS OF STUN :bluesurprised:
             power += ent.Comp.User.Value.Comp.PathStage / 2.1f;
 
-        _stun.TryParalyze(args.OtherEntity, TimeSpan.FromSeconds(power), false);
+        _stun.TryUpdateParalyzeDuration(args.OtherEntity, TimeSpan.FromSeconds(power));
         _voidcurse.DoCurse(args.OtherEntity);
 
         TryComp<TagComponent>(args.OtherEntity, out var tag);

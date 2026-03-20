@@ -20,8 +20,8 @@
       organs:
         heart: ADTOrganFelinidHeart
         lungs: OrganHumanLungs
-        stomach: OrganReptilianStomach
-        liver:  OrganAnimalLiver
+        stomach: ADTOrganFelinidStomach
+        liver: ADTOrganFelinidLiver
         kidneys: OrganHumanKidneys
     right arm:
       part: RightArmHuman

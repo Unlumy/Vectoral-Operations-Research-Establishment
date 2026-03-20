@@ -1,13 +1,17 @@
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
+using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.Database;
 using Content.Shared.Inventory;
+using Content.Shared.Lock;
 using Content.Shared.Popups;
 using Content.Shared.Preferences;
 using Content.Shared.Speech;
 using Content.Shared.VoiceMask;
+using Robust.Shared.Configuration;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.VoiceMask;
@@ -19,15 +23,22 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly LockSystem _lock = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+
+    // CCVar.
+    private int _maxNameLength;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<VoiceMaskComponent, InventoryRelayedEvent<TransformSpeakerNameEvent>>(OnTransformSpeakerName);
+        SubscribeLocalEvent<VoiceMaskComponent, LockToggledEvent>(OnLockToggled);
         SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeNameMessage>(OnChangeName);
         SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeVerbMessage>(OnChangeVerb);
         SubscribeLocalEvent<VoiceMaskComponent, ClothingGotEquippedEvent>(OnEquip);
         SubscribeLocalEvent<VoiceMaskSetNameEvent>(OpenUI);
+        Subs.CVar(_cfg, CCVars.MaxNameLength, value => _maxNameLength = value, true);
         InitializeTTS(); // Corvax-TTS
         InitializeBarks(); // ADT Barks
     }
@@ -36,6 +47,14 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     {
         args.Args.VoiceName = GetCurrentVoiceName(entity);
         args.Args.SpeechVerb = entity.Comp.VoiceMaskSpeechVerb ?? args.Args.SpeechVerb;
+    }
+
+    private void OnLockToggled(Entity<VoiceMaskComponent> ent, ref LockToggledEvent args)
+    {
+        if (args.Locked)
+            _actions.RemoveAction(ent.Comp.ActionEntity);
+        else if (_container.TryGetContainingContainer(ent.Owner, out var container))
+            _actions.AddAction(container.Owner, ref ent.Comp.ActionEntity, ent.Comp.Action, ent);
     }
 
     #region User inputs from UI
@@ -54,7 +73,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
 
     private void OnChangeName(Entity<VoiceMaskComponent> entity, ref VoiceMaskChangeNameMessage message)
     {
-        if (message.Name.Length > HumanoidCharacterProfile.MaxNameLength || message.Name.Length <= 0)
+        if (message.Name.Length > _maxNameLength || message.Name.Length <= 0)
         {
             _popupSystem.PopupEntity(Loc.GetString("voice-mask-popup-failure"), entity, message.Actor, PopupType.SmallCaution);
             return;
@@ -72,7 +91,9 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     #region UI
     private void OnEquip(EntityUid uid, VoiceMaskComponent component, ClothingGotEquippedEvent args)
     {
-        if (component.Action != null) //ADT tweak
+        if (_lock.IsLocked(uid) || component.Action != null) //ADT-tweak: возможность нулевого эешна
+            return;
+
         _actions.AddAction(args.Wearer, ref component.ActionEntity, component.Action, uid);
     }
 

@@ -1,9 +1,9 @@
-using Content.Server.Administration.Commands;
 using Content.Server.Antag;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Zombies;
 using Content.Shared.Administration;
+using Content.Server.Clothing.Systems;
 using Content.Shared.Database;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
@@ -20,31 +20,18 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly ZombieSystem _zombie = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly OutfitSystem _outfit = default!;
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultTraitorRule = "Traitor";
+    private static readonly EntProtoId DefaultBloodBrotherRule = "BloodBrother"; //ADT-tweak
+    private static readonly EntProtoId DefaultTraitorRule = "TraitorOnly"; //ADT-tweak
+    private static readonly EntProtoId DefaultInitialInfectedRule = "Zombie";
+    private static readonly EntProtoId DefaultNukeOpRule = "LoneOpsSpawn";
+    private static readonly EntProtoId DefaultRevsRule = "Revolutionary";
+    private static readonly EntProtoId DefaultThiefRule = "Thief";
+    private static readonly EntProtoId DefaultChangelingRule = "Changeling";
+    private static readonly EntProtoId ParadoxCloneRuleId = "ParadoxCloneSpawn";
+    private static readonly ProtoId<StartingGearPrototype> PirateGearId = "PirateGear";
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultInitialInfectedRule = "Zombie";
-
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultNukeOpRule = "LoneOpsSpawn";
-
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultRevsRule = "Revolutionary";
-
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultThiefRule = "Thief";
-
-    [ValidatePrototypeId<StartingGearPrototype>]
-    private const string PirateGearId = "PirateGear";
-
-    // ADT-Changeling-Tweak-Start
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultChangelingRule = "ChangelingGameRule";
-    // ADT-Changeling-Tweak-End
-
-    private readonly EntProtoId _paradoxCloneRuleId = "ParadoxCloneSpawn";
 
     // All antag verbs have names so invokeverb works.
     private void AddAntagVerbs(GetVerbsEvent<Verb> args)
@@ -73,7 +60,7 @@ public sealed partial class AdminVerbSystem
                 _antag.ForceMakeAntag<TraitorRuleComponent>(targetPlayer, DefaultTraitorRule);
             },
             Impact = LogImpact.High,
-            Message = string.Join(": ", traitorName,  Loc.GetString("admin-verb-make-traitor")),
+            Message = string.Join(": ", traitorName, Loc.GetString("admin-verb-make-traitor")),
         };
         args.Verbs.Add(traitor);
 
@@ -131,7 +118,7 @@ public sealed partial class AdminVerbSystem
             Act = () =>
             {
                 // pirates just get an outfit because they don't really have logic associated with them
-                SetOutfitCommand.SetOutfit(args.Target, PirateGearId, EntityManager);
+                _outfit.SetOutfit(args.Target, PirateGearId);
             },
             Impact = LogImpact.High,
             Message = string.Join(": ", pirateName, Loc.GetString("admin-verb-make-pirate")),
@@ -199,6 +186,22 @@ public sealed partial class AdminVerbSystem
         args.Verbs.Add(changeling);
         // ADT-Changeling-Tweak-End
 
+        // ADT-blood-brothers-Tweak-Start
+        Verb bloodBrother = new()
+        {
+            Text = Loc.GetString("admin-verb-make-brother"),
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/ADT/Interface/Misc/job_icons.rsi"), "BloodBrotherLead"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<TraitorRuleComponent>(targetPlayer, DefaultBloodBrotherRule);
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", traitorName, Loc.GetString("admin-verb-make-brother")),
+        };
+        args.Verbs.Add(bloodBrother);
+        // ADT-blood-brothers-Tweak-End
+
         // Paradox clone
         var paradoxCloneName = Loc.GetString("admin-verb-text-make-paradox-clone");
         Verb paradox = new()
@@ -208,7 +211,7 @@ public sealed partial class AdminVerbSystem
             Icon = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/job_icons.rsi"), "ParadoxClone"),
             Act = () =>
             {
-                var ruleEnt = _gameTicker.AddGameRule(_paradoxCloneRuleId);
+                var ruleEnt = _gameTicker.AddGameRule(ParadoxCloneRuleId);
 
                 if (!TryComp<ParadoxCloneRuleComponent>(ruleEnt, out var paradoxCloneRuleComp))
                     return;

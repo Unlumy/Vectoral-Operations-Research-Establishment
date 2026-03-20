@@ -2,7 +2,8 @@
   id: ADT_Meta
   mapName: 'Meta Station'
   mapPath: /Maps/ADTMaps/ADTStations/adt_meta.yml
-  minPlayers: 10
+  minPlayers: 20
+  maxPlayers: 35
   stations:
     ADT_Meta:
       stationProto: StandardNanotrasenStation
@@ -18,9 +19,11 @@
           path: /Maps/ADTMaps/Shuttles/adt_cargo.yml
         - type: StationJobs
           availableJobs:
+            #centcom specialists
+            # ADTCentcomConsultant: [ 1, 1 ] #ADT-Roles # Убрано по голосованию
+            ADTBlueShieldOfficer: [ 1, 1 ] #ADT-Roles
             # command
             Captain: [ 1, 1 ]
-            ADTBlueShieldOfficer: [ 1, 1 ] #ADT-Roles
             #service
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 2, 2 ]
@@ -71,7 +74,7 @@
             # juridical
             Lawyer: [ 1, 1 ]
             IAA: [ 1, 1 ]
-            Magistrat: [ 1, 1 ] #ADT-Roles
+            # Magistrat: [ 1, 1 ] #ADT-Roles
             #silicon
             StationAi: [ 1, 1 ]
             Borg: [ 2, 2 ]

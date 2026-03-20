@@ -1,8 +1,8 @@
 using Content.Shared.Examine;
 using Content.Shared.Coordinates.Helpers;
-using Content.Server.Power.Components;
 using Content.Server.PowerCell;
 using Content.Shared.Interaction;
+using Content.Shared.Power.Components;
 using Content.Shared.Storage;
 using System.Linq;
 
@@ -13,7 +13,6 @@ public sealed class HolosignSystem : EntitySystem
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!; // ADT-Tweak
-
 
     public override void Initialize()
     {
@@ -61,7 +60,7 @@ public sealed class HolosignSystem : EntitySystem
 
         // places the holographic sign at the click location, snapped to grid.
         // overlapping of the same holo on one tile remains allowed to allow holofan refreshes
-        var holoUid = EntityManager.SpawnEntity(component.SignProto, args.ClickLocation.SnapToGrid(EntityManager));
+        var holoUid = Spawn(component.SignProto, args.ClickLocation.SnapToGrid(EntityManager));
         var xform = Transform(holoUid);
         if (!xform.Anchored)
             _transform.AnchorEntity(holoUid, xform); // anchor to prevent any tempering with (don't know what could even interact with it)

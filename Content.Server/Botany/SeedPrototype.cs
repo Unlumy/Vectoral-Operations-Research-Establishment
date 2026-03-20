@@ -1,5 +1,8 @@
+using Content.Server.ADT.SeedDna.Systems; //ADT-Tweak
 using Content.Server.Botany.Components;
 using Content.Server.Botany.Systems;
+using Content.Server.EntityEffects.Effects.Botany;
+using Content.Server.EntityEffects; //ADT-Tweak
 using Content.Shared.Atmos;
 using Content.Shared.Database;
 using Content.Shared.EntityEffects;
@@ -7,15 +10,14 @@ using Content.Shared.Random;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Botany;
 
-[Prototype]
+[Prototype("seed")] //ADT-Tweak
 public sealed partial class SeedPrototype : SeedData, IPrototype
 {
-    [IdDataField] public string ID { get; private set; } = default!;
+    [IdDataField] public string ID { get; private init; } = default!; //ADT-Tweak
 }
 
 public enum HarvestType : byte
@@ -80,9 +82,15 @@ public partial struct SeedChemQuantity
     [DataField("Inherent")] public bool Inherent = true;
 }
 
-// TODO reduce the number of friends to a reasonable level. Requires ECS-ing things like plant holder component.
+// TODO Make Botany ECS and give it a proper API. I removed the limited access of this class because it's egregious how many systems needed access to it due to a lack of an actual API.
+/// <remarks>
+/// SeedData is no longer restricted because the number of friends is absolutely unreasonable.
+/// This entire data definition is unreasonable. I felt genuine fear looking at this, this is horrific. Send help.
+/// </remarks>
+// TODO: Hit Botany with hammers
 [Virtual, DataDefinition]
-[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffect), typeof(MutationSystem))]
+
+// [Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffectSystem), typeof(MutationSystem), typeof(SeedDnaConsoleSystem))] //ADT-Tweak: ничего же плохого не будет,да?
 public partial class SeedData
 {
     #region Tracking
@@ -131,8 +139,8 @@ public partial class SeedData
     /// <summary>
     ///     The entity prototype this seed spawns when it gets harvested.
     /// </summary>
-    [DataField("productPrototypes", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
-    public List<string> ProductPrototypes = new();
+    [DataField]
+    public List<EntProtoId> ProductPrototypes = new();
 
     [DataField] public Dictionary<string, SeedChemQuantity> Chemicals = new();
 
@@ -241,8 +249,8 @@ public partial class SeedData
     /// <summary>
     ///     The seed prototypes this seed may mutate into when prompted to.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<SeedPrototype>))]
-    public List<string> MutationPrototypes = new();
+    [DataField]
+    public List<ProtoId<SeedPrototype>> MutationPrototypes = new();
 
     /// <summary>
     ///  Log impact for when the seed is planted.
@@ -268,8 +276,8 @@ public partial class SeedData
             Mysterious = Mysterious,
 
             PacketPrototype = PacketPrototype,
-            ProductPrototypes = new List<string>(ProductPrototypes),
-            MutationPrototypes = new List<string>(MutationPrototypes),
+            ProductPrototypes = new List<EntProtoId>(ProductPrototypes),
+            MutationPrototypes = new List<ProtoId<SeedPrototype>>(MutationPrototypes),
             Chemicals = new Dictionary<string, SeedChemQuantity>(Chemicals),
             ConsumeGasses = new Dictionary<Gas, float>(ConsumeGasses),
             ExudeGasses = new Dictionary<Gas, float>(ExudeGasses),
@@ -328,8 +336,8 @@ public partial class SeedData
             Mysterious = other.Mysterious,
 
             PacketPrototype = other.PacketPrototype,
-            ProductPrototypes = new List<string>(other.ProductPrototypes),
-            MutationPrototypes = new List<string>(other.MutationPrototypes),
+            ProductPrototypes = new List<EntProtoId>(other.ProductPrototypes),
+            MutationPrototypes = new List<ProtoId<SeedPrototype>>(other.MutationPrototypes),
 
             Chemicals = new Dictionary<string, SeedChemQuantity>(Chemicals),
             ConsumeGasses = new Dictionary<Gas, float>(ConsumeGasses),

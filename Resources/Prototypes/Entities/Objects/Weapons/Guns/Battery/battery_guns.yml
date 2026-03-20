@@ -27,6 +27,38 @@
     price: 500
 
 - type: entity
+  parent: [BaseWeaponBattery, BaseGunWieldable]
+  id: BaseLaserRifle
+  abstract: true
+  components:
+  - type: Item
+    size: Large
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: Appearance
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 62.5
+  - type: StaticPrice
+    price: 420
+
+- type: entity
   id: BaseWeaponPowerCell
   parent: BaseItem
   abstract: true
@@ -103,7 +135,7 @@
 
 - type: entity
   name: svalinn laser pistol
-  parent: [ BaseWeaponPowerCellSmall, BaseSecurityContraband ]
+  parent: [BaseWeaponPowerCellSmall, BaseSecurityContraband]
   id: WeaponLaserSvalinn
   description: A cheap and widely used laser pistol.
   components:
@@ -116,6 +148,10 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Item
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedOffset: 0,-7
     sprite: Objects/Weapons/Guns/Battery/svalinn.rsi
   - type: MagazineVisuals
     magState: mag
@@ -124,7 +160,7 @@
 
 - type: entity
   name: retro laser blaster
-  parent: [ BaseWeaponBatterySmall, BaseMajorContraband ]
+  parent: [BaseWeaponBatterySmall, BaseMajorContraband]
   id: WeaponLaserGun
   description: A weapon using light amplified by the stimulated emission of radiation.
   components:
@@ -136,6 +172,21 @@
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
+  - type: Item
+    storedOffset: 0,-5
+  # ADT-Tweak start
+  # - type: RunAndGunSpreadModifier
+  #   modifier: 0.3
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 7
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  # ADT-Tweak end
   - type: HitscanBatteryAmmoProvider
     proto: RedLaser #ADT_Tweak - понерфил
     fireCost: 62.5
@@ -147,7 +198,7 @@
 
 - type: entity
   name: makeshift laser pistol
-  parent: BaseWeaponBatterySmall
+  parent: [BaseWeaponBatterySmall, BaseMinorContraband]
   id: WeaponMakeshiftLaser
   description: Better pray it won't burn your hands off.
   components:
@@ -159,11 +210,26 @@
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
+  - type: Item
+    storedOffset: 0,-4
   - type: Gun #ADT Tweak Start
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
       params:
         pitch: 2 #ADT Tweak Ends
+  # ADT-Tweak start
+  # - type: RunAndGunSpreadModifier
+  #   modifier: 0.4
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 7
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  # ADT-Tweak end
   - type: MagazineVisuals
     magState: mag
     steps: 5
@@ -185,10 +251,14 @@
 
 - type: entity
   name: tesla gun
-  parent: BaseWeaponBattery
+  parent: [BaseWeaponBattery, BaseMajorContraband]
   id: WeaponTeslaGun
   description: The power of the primordial element of lightning in your hands.
   components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,1
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/tesla_gun.rsi
     layers:
@@ -233,6 +303,16 @@
   - type: Appearance
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 9
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  - type: GunExecutionBlacklist #ADT-Tweak
   - type: Gun
     selectedMode: SemiAuto
     fireRate: 2
@@ -243,28 +323,199 @@
     fireCost: 20 #ADT_Tweak 62.5 -> 20
   - type: StaticPrice
     price: 300
+  # ADT TWEAK START - добавляем аттачменты из второго прототипа
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - ADTAttachmentLaserSight
+          - SurvivalKnifeAttachment
+      rmc-aslot-rail:
+        whitelist:
+            tags:
+            - ADTAttachmentMagneticHarness
+            - ADTAttachmentReflexSight
+            - ADTAttachmentT2Miniscope
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.25, -0.14
+      rmc-aslot-rail: -0.3, -0.09375
+  # ADT TWEAK END
 
 - type: entity
   name: laser rifle
   parent: [WeaponLaserCarbinePractice, BaseSecurityContraband, ADTBaseAttachableHolder] # ADT TWEAK #ADT Tweak - removed BaseGunWieldable
   id: WeaponLaserCarbine
-  description: Favoured by Nanotrasen Security for being cheap and easy to use.
+  description: Favoured by Nanotrasen Security for being cheap and easy to use.  
+  # ADT-Tweak start
   components:
-  - type: StaticPrice
-    price: 420
   - type: HitscanBatteryAmmoProvider
-    proto: RedMediumLaser #ADT_Tweak
-    fireCost: 28.5 #ADT_Tweak 62.5 -> 28.5
-  - type: MeleeWeapon #ADT_Tweak
+    proto: RedMediumLaser  
+
+- type: entity
+  name: pulse pistol
+  parent: [BaseWeaponBatterySmall, BaseCentcommContraband]
+  id: WeaponPulsePistol
+  description: A state of the art energy pistol favoured as a sidearm by the NT operatives.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/pulse_pistol.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Item
+    storedOffset: -2,-5
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: Appearance
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/pulse_pistol.rsi
+  # ADT-Tweak start
+  # - type: RunAndGunSpreadModifier
+  #   modifier: 0.1
+  - type: MeleeWeapon
     resetOnHandSelected: false
     attackRate: 1
     damage:
       types:
-        Blunt: 5
+        Blunt: 7
     soundHit:
       collection: GenericHit
-  - type: AltFireMelee #ADT_Tweak
-# ADT TWEAK START
+  - type: AltFireMelee
+  # ADT-Tweak end
+  - type: Gun
+    fireRate: 1 # ADT-Tweak 2 -> 1
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: Pulse
+    fireCost: 100 # ADT tweak 200 -> 100
+  - type: Battery
+    maxCharge: 1000 # ADT tweak 2000->1000
+    startingCharge: 1000 # ADT tweak 2000 -> 1000
+
+- type: entity
+  name: pulse carbine
+  parent: [BaseWeaponBattery, BaseGunWieldable, BaseCentcommContraband, ADTBaseAttachableHolder ] # ADT-Tweak Add ADTBaseAttachableHolder
+  id: WeaponPulseCarbine
+  description: A high tech energy carbine favoured by the NT-ERT operatives.
+  components:
+  - type: Item
+    size: Large
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: Appearance
+  # ADT-Tweak start
+  # - type: RunAndGunSpreadModifier
+  #   modifier: 0.4
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 9
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  # ADT-Tweak end
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    fireRate: 3
+    availableModes:
+      - SemiAuto
+      - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
+  # ADT-Tweak start
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - ADTAttachmentLaserSight
+          - SurvivalKnifeAttachment
+      rmc-aslot-rail:
+        whitelist:
+            tags:
+            - ADTAttachmentMagneticHarness
+            - ADTAttachmentReflexSight
+            - ADTAttachmentT2Miniscope
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.25, -0.07
+      rmc-aslot-rail: -0.03125, -0.06
+  # ADT-Tweak end
+  - type: HitscanBatteryAmmoProvider
+    proto: Pulse
+    fireCost: 100 # ADT tweak 200 -> 100
+  - type: Battery
+    maxCharge: 2500 # ADT tweak 5000 -> 2500
+    startingCharge: 2500 # ADT tweak 5000 -> 2500
+
+- type: entity
+  name: pulse rifle
+  parent: [BaseWeaponBattery, BaseGunWieldable, BaseCentcommContraband, ADTBaseAttachableHolder ] # ADT-Tweak Add ADTBaseAttachableHolder
+  id: WeaponPulseRifle
+  description: A weapon that is almost as infamous as its users.
+  components:
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,4,1
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: Appearance
+  # ADT-Tweak start
+  # - type: RunAndGunSpreadModifier
+  #   modifier: 0.4
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 9
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  # ADT-Tweak end
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+  - type: Gun
+    fireRate: 3 # ADT tweak 1.5 -> 3
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
+  # ADT-Tweak start
   - type: AttachableHolder
     slots:
       rmc-aslot-underbarrel:
@@ -282,103 +533,7 @@
     offsets:
       rmc-aslot-underbarrel: 0.25, -0.14
       rmc-aslot-rail: -0.03125, -0.09375
-# ADT TWEAK END
-
-- type: entity
-  name: pulse pistol
-  parent: BaseWeaponBatterySmall
-  id: WeaponPulsePistol
-  description: A state of the art energy pistol favoured as a sidearm by the NT operatives.
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/pulse_pistol.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: false
-  - type: Appearance
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/pulse_pistol.rsi
-  - type: Gun
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
-  - type: HitscanBatteryAmmoProvider
-    proto: Pulse
-    fireCost: 100 # ADT tweak 200 -> 100
-  - type: Battery
-    maxCharge: 1000 # ADT tweak 2000->1000
-    startingCharge: 1000 # ADT tweak 2000 -> 1000
-
-- type: entity
-  name: pulse carbine
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseCentcommContraband]
-  id: WeaponPulseCarbine
-  description: A high tech energy carbine favoured by the NT-ERT operatives.
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: false
-  - type: Appearance
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
-  - type: Gun
-    selectedMode: SemiAuto
-    fireRate: 3
-    availableModes:
-      - SemiAuto
-      - FullAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
-  - type: HitscanBatteryAmmoProvider
-    proto: Pulse
-    fireCost: 100 # ADT tweak 200 -> 100
-  - type: Battery
-    maxCharge: 2500 # ADT tweak 5000 -> 2500
-    startingCharge: 2500 # ADT tweak 5000 -> 2500
-
-- type: entity
-  name: pulse rifle
-  parent: [BaseWeaponBattery, BaseGunWieldable]
-  id: WeaponPulseRifle
-  description: A weapon that is almost as infamous as its users.
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: false
-  - type: Appearance
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
-  - type: Gun
-    fireRate: 3 # ADT tweak 1.5 -> 3
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
+  # ADT-Tweak end
   - type: HitscanBatteryAmmoProvider
     proto: Pulse
     fireCost: 100
@@ -390,12 +545,17 @@
     autoRecharge: true
     autoRechargeRate: 100
     # ADT tweak end
+
 - type: entity
   name: laser cannon
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband, ADTBaseAttachableHolder] # ADT-Tweak Add ADTBaseAttachableHolder
   id: WeaponLaserCannon
   description: A heavy duty, high powered laser weapon.
   components:
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,4,1
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
     layers:
@@ -404,6 +564,37 @@
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
+  # ADT-Tweak start
+  - type: RunAndGunSpreadModifier
+    modifier: 0.04
+    minVelocity: 20 # чуть меньше скорости бега
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 9
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - ADTAttachmentLaserSight
+          - SurvivalKnifeAttachment
+      rmc-aslot-rail:
+        whitelist:
+            tags:
+            - ADTAttachmentMagneticHarness
+            - ADTAttachmentReflexSight
+            - ADTAttachmentT2Miniscope
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.25, -0.24
+      rmc-aslot-rail: -0.03125, -0.17
+  # ADT-Tweak end
   - type: MagazineVisuals
     magState: mag
     steps: 5
@@ -424,13 +615,15 @@
 
 - type: entity
   name: portable particle decelerator
-  parent: BaseWeaponBattery
+  parent: [BaseWeaponBattery, BaseEngineeringContraband]
   id: WeaponParticleDecelerator
   description: A portable particle decelerator capable of decomposing a tesla or singularity.
   components:
     - type: Item
       size: Ginormous
     - type: MultiHandedItem
+    # - type: RunAndGunSpreadModifier
+    #   modifier: 0.3
     - type: ClothingSpeedModifier
       walkModifier: 0.6
       sprintModifier: 0.6
@@ -452,13 +645,17 @@
     - type: Battery
       maxCharge: 10000
       startingCharge: 10000
-      
+
 - type: entity
   name: x-ray cannon
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband, ADTBaseAttachableHolder] # ADT-Tweak Add ADTBaseAttachableHolder
   id: WeaponXrayCannon
   description: An experimental weapon that uses concentrated x-ray energy against its target.
   components:
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,4,1
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/xray.rsi
     layers:
@@ -467,6 +664,37 @@
     - state: mag-unshaded-0
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
+  #ADT-Tweak start
+  - type: RunAndGunSpreadModifier
+    modifier: 0.03
+    minVelocity: 15 # значительно меньше скорости бега
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 9
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - ADTAttachmentLaserSight
+          - SurvivalKnifeAttachment
+      rmc-aslot-rail:
+        whitelist:
+            tags:
+            - ADTAttachmentMagneticHarness
+            - ADTAttachmentReflexSight
+            - ADTAttachmentT2Miniscope
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.25, -0.14
+      rmc-aslot-rail: -0.03125, -0.06
+  # ADT-Tweak end
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/xray.rsi
   - type: Gun
@@ -495,6 +723,22 @@
     - state: mag-unshaded-0
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
+  - type: Item
+    storedOffset: -1,-5
+  # ADT-Tweak start
+  # - type: RunAndGunSpreadModifier
+  #   modifier: 0.2
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 7
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  - type: GunExecutionBlacklist #ADT-Tweak
+  # ADT-Tweak end
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/practice_disabler.rsi
     quickEquip: false
@@ -519,11 +763,12 @@
     tags:
     - Taser
     - Sidearm
-    - ADTBsoWeapon #ADT tweak
+    - ADTBsoWeapon #ADT-tweak
+  - type: PacifismAllowedGun #ADT-tweak
 
 - type: entity
   name: disabler
-  parent: [ WeaponDisablerPractice, BaseSecurityCommandContraband ]
+  parent: [WeaponDisablerPractice, BaseSecurityCommandContraband]
   id: WeaponDisabler
   description: A self-defense weapon that exhausts organic targets, weakening them until they collapse.
   components:
@@ -535,6 +780,20 @@
       - state: mag-unshaded-0
         map: ["enum.GunVisualLayers.MagUnshaded"]
         shader: unshaded
+  # ADT-Tweak start
+  - type: RunAndGunSpreadModifier
+    modifier: 0.05
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 7
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  - type: GunExecutionBlacklist #ADT-Tweak
+  # ADT-Tweak end
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/disabler.rsi
     quickEquip: false
@@ -548,15 +807,18 @@
     guides:
     - Security
     - Antagonists
+  - type: PacifismAllowedGun
 
 - type: entity
   name: disabler SMG
-  parent: [ BaseWeaponBattery, BaseSecurityContraband ]
+  parent: [BaseWeaponBattery, BaseSecurityContraband]
   id: WeaponDisablerSMG
   description: Advanced weapon that exhausts organic targets, weakening them until they collapse.
   components:
   - type: Item
     size: Large
+    shape:
+    - 0,0,2,1
   - type: Tag
     tags:
       - Taser
@@ -577,6 +839,20 @@
       - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+  # ADT-Tweak start
+  - type: RunAndGunSpreadModifier
+    modifier: 0.04
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 9
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  - type: GunExecutionBlacklist #ADT-Tweak
+  # ADT-Tweak end
   - type: ProjectileBatteryAmmoProvider
     proto: BulletDisablerSmg
     fireCost: 25
@@ -587,12 +863,13 @@
   - type: Appearance
   - type: StaticPrice
     price: 260
+  - type: PacifismAllowedGun
 
 - type: entity
   name: taser
-  parent: [ BaseWeaponBatterySmall, BaseSecurityContraband ]
+  parent: [BaseWeaponBatterySmall, BaseSecurityContraband]
   id: WeaponTaser
-  description: A low-capacity, energy-based stun gun used by security teams to subdue targets at range.
+  description: A low-capacity, energy-based stun gun used by security teams to subdue targets at close range.
   components:
   - type: Tag
     tags:
@@ -606,6 +883,8 @@
     - state: mag-unshaded-0
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
+  # - type: RunAndGunSpreadModifier
+  #   modifier: 0.2
   - type: Item
     heldPrefix: taser4
   - type: Clothing
@@ -613,6 +892,7 @@
     slots:
     - Belt
   - type: Gun
+    fireRate: 0.5
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser.ogg
   - type: ProjectileBatteryAmmoProvider
@@ -623,11 +903,29 @@
     steps: 5
     zeroVisible: true
   - type: Appearance
+  - type: PacifismAllowedGun
+
+- type: entity
+  name: elite taser
+  parent: [ BaseCentcommContraband, WeaponTaser ]
+  id: WeaponTaserSuper
+  suffix: ADMEME
+  description: A low-capacity, energy-based stun gun used by elite security teams to disable even the toughest of targets.
+  components:
+  - type: Gun
+    fireRate: 0.5
+    soundGunshot:
+      path: /Audio/Effects/tesla_collapse.ogg # The wrath of god...
+      params:
+        volume: -6
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletTaserSuper
+    fireCost: 200
 
 - type: entity
   name: antique laser pistol
   parent: [BaseWeaponBatterySmall, BaseGrandTheftContraband]
-  id: WeaponAntiqueLaser
+  id: WeaponAntiqueLaser  
   description: This is an antique laser pistol. All craftsmanship is of the highest quality. It is decorated with a mahogany grip and chrome filigree. The object menaces with spikes of energy. On the item is an image of a captain and a clown. The clown is dead. The captain is striking a heroic pose.
   components:
   - type: Sprite
@@ -640,6 +938,19 @@
       shader: unshaded
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/antiquelasergun.rsi
+  # ADT-Tweak start
+  - type: RunAndGunSpreadModifier
+    modifier: 0.05
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 7
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  # ADT-Tweak end
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
@@ -652,7 +963,6 @@
     startingCharge: 1500
 # End ADT Tweak
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 40
   - type: MagazineVisuals
     magState: mag
@@ -675,12 +985,14 @@
 
 - type: entity
   name: advanced laser pistol
-  parent: [ BaseWeaponBatterySmall, BaseSecurityContraband]
+  parent: [BaseWeaponBatterySmall, BaseSecurityContraband]
   id: WeaponAdvancedLaser
   description: An experimental high-energy laser pistol with a self-charging nuclear battery.
   components:
   - type: Item
-    size: Normal  # Intentionally larger than other pistols
+    size: Normal
+    shape:
+    - 0,0,1,1
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
     layers:
@@ -691,6 +1003,19 @@
       shader: unshaded
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
+  # ADT-Tweak start
+  - type: RunAndGunSpreadModifier
+    modifier: 0.04
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 7
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  # ADT-Tweak end
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
@@ -698,7 +1023,6 @@
     proto: RedMediumLaser
     fireCost: 100
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 30
   - type: MagazineVisuals
     magState: mag
@@ -723,6 +1047,8 @@
       visible: false
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
+  - type: Item
+    storedOffset: 0,-6
   - type: Appearance
   - type: MagazineVisuals
     magState: mag
@@ -753,12 +1079,12 @@
     node: start
   - type: StaticPrice
     price: 100
-
+  - type: GunExecutionBlacklist #ADT-tweak
 - type: entity
   name: experimental C.H.I.M.P. handcannon
   parent: [WeaponPistolCHIMP] #, BaseSyndicateContraband] # ADT Remove cringe
   id: WeaponPistolCHIMPUpgraded
-  description: This C.H.I.M.P. seems to have a greater punch than is usual...
+  description: This C.H.I.M.P. seems to have a greater punch than usual...
   components:
   - type: BatteryWeaponFireModes
     fireModes:
@@ -784,6 +1110,8 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
+  # - type: RunAndGunSpreadModifier
+  #   modifier: 0.2
   - type: Gun
     fireRate: 1
     soundGunshot:
@@ -792,14 +1120,13 @@
     proto: RedMediumLaser
     fireCost: 100
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 40
   - type: StaticPrice
     price: 750
 
 - type: entity
   name: energy shotgun
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseGrandTheftContraband, ADTBaseMagneticGun] # ADT TWEAK
+  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponEnergyShotgun
   description: A one-of-a-kind prototype energy weapon that uses various shotgun configurations. It offers the possibility of both lethal and non-lethal shots, making it a versatile weapon.
   components:
@@ -816,6 +1143,19 @@
     steps: 5
     zeroVisible: false
   - type: Appearance
+  # ADT-Tweak start
+  # - type: RunAndGunSpreadModifier
+  #   modifier: 0.4
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 9
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  # ADT-Tweak end
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
   - type: Gun
@@ -823,44 +1163,74 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: BulletLaserSpread
+    proto: BulletLaserSpreadNarrow
+    fireCost: 80
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: BulletLaserSpreadNarrow
+      fireCost: 80
+    - proto: BulletDisablerSmgSpread
+      fireCost: 48
+      pacifismAllowedMode: true
+  - type: Item
+    size: Large
+    sprite: Objects/Weapons/Guns/Battery/inhands_64x.rsi
+    heldPrefix: energy
+  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  - type: Battery
+    maxCharge: 480
+    startingCharge: 480
+
+- type: entity
+  name: energy magnum
+  parent: [BaseWeaponBatterySmall, BaseGrandTheftContraband]
+  id: WeaponEnergyMagnum
+  description: A high powered self-charging energy pistol designed for elite security personnel. It has has three firing modes allowing for either high damage, window piercing, or non-lethal disabling.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-unshaded-1
+      visible: false
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: true
+  - type: Appearance
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
+  - type: Tag
+    tags:
+    - HighRiskItem
+    - Sidearm
+  - type: StealTarget
+    stealGroup: WeaponEnergyMagnum
+  - type: Gun
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletLaserMagnum
     fireCost: 150
   - type: BatteryWeaponFireModes
     fireModes:
-    - proto: BulletLaserSpread
-      fireCost: 100
-    - proto: BulletLaserHeavySpread
-      fireCost: 100
-    - proto: BulletDisablerSmgSpread # ADT nerf
-      fireCost: 100 # ADT nerf
-  - type: Item
-    size: Large
-    shape:
-    - 0,0,3,1
-    sprite: Objects/Weapons/Guns/Battery/inhands_64x.rsi
-    heldPrefix: energy
-# ADT tweak start
-#  - type: Tag
-#    tags:
-#    - HighRiskItem
-# ADT tweak end
-# ADT tweak start - закомменчено в связи с временным выводом энергодробаша
-  # - type: StealTarget
-  #   stealGroup: WeaponEnergyShotgun
-# ADT tweak end - закомменчено в связи с временным выводом энергодробаша
-  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
-  - type: Battery
-    maxCharge: 1200
-    startingCharge: 1200
+    - proto: BulletLaserMagnum
+      fireCost: 150
+    - proto: BulletLaserWindowPiercingMagnum
+      fireCost: 150
+    - proto: BulletDisabler
+      fireCost: 62.5
+      pacifismAllowedMode: true
   - type: BatterySelfRecharger
-    autoRecharge: true
-    autoRechargeRate: 24
-    autoRechargePause: true
-    autoRechargePauseTime: 30
+    autoRechargeRate: 48
+    autoRechargePauseTime: 10
 
 - type: entity
   name: temperature gun
-  parent: [BaseWeaponBattery, BaseGunWieldable]
+  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband, ADTBaseAttachableHolder] # ADT-Tweak Add ADTBaseAttachableHolder
   id: WeaponTemperatureGun
   description: An advanced gun that shoots body-temperature-changing beams. This probably constitutes as some kind of war crime.
   components:
@@ -881,6 +1251,29 @@
     magState: mag
     steps: 5
     zeroVisible: false
+  # ADT-Tweak start
+  - type: RunAndGunSpreadModifier
+    modifier: 0.03
+    minVelocity: 20 # чуть меньше скорости бега
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 9
+    soundHit:
+      collection: GenericHit
+  - type: AltFireMelee
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - SurvivalKnifeAttachment
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.25, -0.14
+  # ADT-Tweak end
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/temp_gun.rsi
   - type: Gun
@@ -904,12 +1297,12 @@
 
 - type: entity
   name: xenoborg laser gun
-  parent: [ WeaponAdvancedLaser, BaseXenoborgContraband ]
+  parent: [WeaponAdvancedLaser, BaseXenoborgContraband]
   id: XenoborgLaserGun
 
 - type: entity
   name: xenoborg heavy laser gun
-  parent: [ WeaponAdvancedLaser, BaseXenoborgContraband ]
+  parent: [WeaponAdvancedLaser, BaseXenoborgContraband]
   id: XenoborgHeavyLaserGun
   components:
   - type: HitscanBatteryAmmoProvider

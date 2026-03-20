@@ -22,6 +22,7 @@ using Content.Shared.Mind;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -117,7 +118,7 @@ public sealed class PhantomRuleSystem : GameRuleSystem<PhantomRuleComponent>
         {
             var stunTime = TimeSpan.FromSeconds(4);
             RemComp<VesselComponent>(uid);
-            _sharedStun.TryParalyze(vessel, stunTime, true);
+            _sharedStun.TryUpdateParalyzeDuration(vessel, stunTime);
         }
         foreach (var cursed in component.CursedVessels)
         {

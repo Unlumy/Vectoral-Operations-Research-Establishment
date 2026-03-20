@@ -6,7 +6,8 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 216000 #60 hrs
+      time: 60h
+  weight: 9
   startingGear: SeniorResearcherGear
   icon: "JobIconSeniorResearcher"
   supervisors: job-supervisors-rd
@@ -21,3 +22,18 @@
     ears: ClothingHeadsetScience
     belt: ClothingBeltUtilityFilled
     pocket1: AnomalyLocatorEmpty
+  storage:
+    back:
+    - ADTHumanCubeWrapped #ADT-CustomADTLoadout
+
+- type: chameleonOutfit
+  id: ADTSeniorResearcherChameleonOutfit
+  job: ADTSeniorResearcher
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatBeretRND
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskGas
+    neck: ClothingNeckTieSci
+    outerClothing: ClothingOuterCoatLabSeniorResearcher
+    gloves: ClothingHandsGlovesLatex

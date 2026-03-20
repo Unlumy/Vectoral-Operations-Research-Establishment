@@ -234,6 +234,24 @@
   - type: Sprite
     sprite: ADT/Structures/Doors/Airlocks/Standard/corporate.rsi
 
+- type: entity
+  parent: Airlock
+  id: ADTAlwaysPoweredUraniumAirlock
+  suffix: Gluttony, Always powered up
+  components:
+  - type: Sprite
+    sprite: ADT/Structures/Doors/Airlocks/Standard/uranium.rsi
+  - type: ApcPowerReceiver
+    needsPower: false
+
+- type: entity
+  parent: Airlock
+  id: ADTUraniumAirlock
+  suffix: Gluttony
+  components:
+  - type: Sprite
+    sprite: ADT/Structures/Doors/Airlocks/Standard/uranium.rsi
+
 #Glass
 - type: entity
   parent: AirlockGlass
@@ -256,8 +274,6 @@
   components:
   - type: Sprite
     sprite: ADT/Structures/Doors/Airlocks/Glass/chaplain.rsi
-  - type: PaintableAirlock
-    department: Engineering
   - type: Wires
     layoutId: AirlockEngineering
 
@@ -268,8 +284,6 @@
   components:
   - type: Sprite
     sprite: ADT/Structures/Doors/Airlocks/Glass/kitchen.rsi
-  - type: PaintableAirlock
-    department: Engineering
   - type: Wires
     layoutId: AirlockEngineering
 
@@ -280,8 +294,6 @@
   components:
   - type: Sprite
     sprite: ADT/Structures/Doors/Airlocks/Glass/robotics.rsi
-  - type: PaintableAirlock
-    department: Engineering
   - type: Wires
     layoutId: AirlockEngineering
 
@@ -292,8 +304,6 @@
   components:
   - type: Sprite
     sprite: ADT/Structures/Doors/Airlocks/Glass/salvage.rsi
-  - type: PaintableAirlock
-    department: Engineering
   - type: Wires
     layoutId: AirlockEngineering
 
@@ -304,8 +314,6 @@
   components:
   - type: Sprite
     sprite: ADT/Structures/Doors/Airlocks/Glass/theatre.rsi
-  - type: PaintableAirlock
-    department: Engineering
   - type: Wires
     layoutId: AirlockEngineering
 
@@ -316,8 +324,6 @@
   components:
   - type: Sprite
     sprite: ADT/Structures/Doors/Airlocks/Glass/bar.rsi
-  - type: PaintableAirlock
-    department: Engineering
   - type: Wires
     layoutId: AirlockEngineering
 
@@ -368,8 +374,6 @@
   components:
   - type: Sprite
     sprite: ADT/Structures/Doors/Airlocks/Glass/barber.rsi
-  - type: PaintableAirlock
-    department: Engineering
   - type: Wires
     layoutId: AirlockEngineering
 

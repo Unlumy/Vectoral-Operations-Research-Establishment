@@ -1,6 +1,6 @@
-﻿using System.Text;
+using System.Text;
 using System.Text.RegularExpressions;
-using Content.Server.Chat.Systems;
+using Content.Shared.Chat;
 
 namespace Content.Server.Corvax.TTS;
 
@@ -140,6 +140,23 @@ public sealed partial class TTSSystem
             {"сии", "Эс И И"},
             {"ии", "И И"},
             {"опз", "О Пэ Зэ"},
+            {"рпс", "Эр Пэ Эс"},
+            //ADT-Tweak-Start
+            {"рсу", "Эр Сэ У"},
+            {"осщ", "О Сэ Ще"},
+            {"ррт", "Эр Эр Тэ"},
+            {"cqc", "Си Кью Си"},
+            {"бармен", "бармэн"},
+            {"бармена", "бармэна"},
+            {"бармену", "бармэну"},
+            {"барменом", "бармэном"},
+            {"бармене", "бармэне"},
+            {"бармены", "бармэны"},
+            {"барменов", "бармэнов"},
+            {"барменам", "бармэнам"},
+            {"барменами", "бармэнами"},
+            {"барменах", "бармэнах"},
+            //ADT-Tweak-End
         };
 
     private static readonly IReadOnlyDictionary<string, string> ReverseTranslit =

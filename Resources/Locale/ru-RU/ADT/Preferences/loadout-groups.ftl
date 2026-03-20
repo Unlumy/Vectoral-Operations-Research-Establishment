@@ -4,6 +4,8 @@
 loadout-group-top-adt = Нижнее белье(Верх)
 loadout-group-bottom-adt = Нижнее белье(Низ)
 loadout-group-socks-adt = Носки
+loadout-group-spray-paints = Баллончики с краской
+
 # Command
 ent-MagistratNeck = Галстуки
 ent-MagistratJumpsuit = Костюмы
@@ -27,9 +29,24 @@ loadout-group-janitor-id-adt = Уборщик, ID
 loadout-group-botanist-id-adt = Ботаник, ID
 loadout-barber-jumpsuit-adt = Парикмахер, комбинезон
 loadout-barber-other-clothing-adt = Парикмахер, верхняя одежда
+loadout-group-clown-mask-adt = Клоун, маска
+loadout-group-clown-gloves-adt = Клоун, перчатки
+loadout-group-clown-pocket1-adt = Клоун, карман 1
+loadout-group-clown-pocket2-adt = Клоун, карман 2
+loadout-group-musician-id-adt = Музыкант, ID
+loadout-group-musician-gloves-adt = Музыкант, перчатки
+loadout-group-reporter-id-adt = Репортёр, ID
+loadout-group-bartender-gloves-adt = Бармен, перчатки
+loadout-group-boxer-id-adt = Боксёр, ID
+loadout-group-boxer-head-adt = Боксёр, голова
+loadout-group-service-worker-gloves-adt = Сервисный работник, перчатки
+loadout-group-service-worker-id-adt = Сервисный работник, ID
+loadout-group-service-worker-jumpsuit-adt = Сервисный работник, комбинезон
+loadout-group-chef-gloves-adt = Шеф-Повар, перчатки
+loadout-group-chef-neck-adt = Шеф-Повар, шея
 
 # Cargo
-loadout-group-quartermaster-id = Квартирмейстер, ID
+loadout-group-quartermaster-id-adt = Квартирмейстер, ID
 loadout-quartermaster-ears-adt = Квартирмейстер, ухо
 loadout-salvage-specialist-jumpsuit-adt = Утилизатор, комбинезон
 loadout-salvage-specialist-neck-adt = Утилизатор, шея
@@ -77,8 +94,9 @@ loadout-group-senior-officer-jumpsuit = Офицер-инструктор, ко�
 loadout-group-senior-officer-backpack = Офицер-инструктор, рюкзак
 loadout-group-senior-officer-outerclothing = Офицер-инструктор, верхняя одежда
 loadout-warden-neck-adt = Смотритель, шея
-loadout-guardofficer-head-adt = Надзиратель, голова
-loadout-guardofficer-jumpsuit-adt = Надзиратель, комбинезон
+loadout-corrections-officer-head-adt = Надзиратель СБ, голова
+loadout-corrections-officer-jumpsuit-adt = Надзиратель СБ, комбинезон
+loadout-corrections-officer-outerclothing-adt = Надзиратель СБ, верхняя одежда
 loadout-group-detective-id-adt = Детектив, ID
 loadout-security-officer-neck-adt = Офицер СБ, шея
 loadout-security-cadet-neck-adt = Кадет СБ, шея
@@ -121,3 +139,14 @@ loadout-group-lawyer-backpack = Магистрат, рюкзак
 # Command
 loadout-captain-ears-adt = Капитан, ухо
 loadout-HoP-ears-adt = Глава персонала, ухо
+
+# Consultant Centcom
+loadout-ccc-ears-adt = консультант Центком, ухо
+loadout-group-ccc-jumpsuit = консультант Центком, комбинезон
+loadout-group-ccc-head = консультант Центком, голова
+loadout-group-ccc-neck = консультант Центком, шея
+loadout-group-ccc-back = консультант Центком, спина
+loadout-group-ccc-outer-clothing = консультант Центком, верхняя одежда
+loadout-group-ccc-shoes = консультант Центком, обувь
+loadout-group-ccc-hands = консультант Центком, перчатки
+loadout-group-ccc-socks = консультант Центком, носки
